@@ -1,0 +1,17 @@
+@import "../main.scss";
+
+header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: $primary;
+    font-size: 2rem;
+
+    @include --tablet {
+        background-color: $accent;
+    }
+
+    @include --mobile {
+        background-color: $grey;
+    }
+}
