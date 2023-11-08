@@ -1,0 +1,15 @@
+@mixin font($font-family: "", $font-weight: "") {
+    @font-face {
+        font-family: $font-family;
+        src: url("../../fonts/#{$font-family}-#{$font-weight}.woff")
+            format("woff");
+        font-weight: $font-weight;
+    }
+}
+@include font("Raleway", 300);
+@include font("Raleway", 400);
+@include font("Raleway", 500);
+@include font("Raleway", 600);
+@include font("Raleway", 700);
+@include font("NunitoSans", 400);
+@include font("NunitoSans", 500);
