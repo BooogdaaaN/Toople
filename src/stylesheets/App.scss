@@ -1,0 +1,23 @@
+@import "../main.scss";
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 10px;
+    font-family: "Raleway";
+    font-weight: 400;
+}
+
+.app {
+    &__container {
+        max-width: 113.6rem;
+        margin: 0 auto;
+
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,29 @@
+@import "../../../main.scss";
+.inputField {
+    position: relative;
+    input {
+        width: 100%;
+        height: 4rem;
+        padding: 0.8rem 1.6rem;
+
+        border-radius: 3rem;
+        border: 3px solid $primary;
+        outline: none;
+    }
+    .icon {
+        position: absolute;
+        bottom: 0.8rem;
+        cursor: pointer;
+        right: 1rem;
+        img {
+            width: 2rem;
+            height: 2rem;
+        }
+    }
+    label {
+        display: inline-block;
+        font-weight: 500;
+        font-size: 2rem;
+        margin-bottom: 0.8rem;
+    }
+}
