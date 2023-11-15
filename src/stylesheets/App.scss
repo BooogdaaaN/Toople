@@ -7,14 +7,17 @@
 
 html {
     font-size: 10px;
-}
-
-.App {
     font-family: "Raleway";
     font-weight: 400;
+}
 
-    .container {
+.app {
+    &__container {
         max-width: 113.6rem;
         margin: 0 auto;
+
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
     }
 }

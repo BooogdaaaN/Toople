@@ -1,18 +1,44 @@
 import "../stylesheets/Header.scss";
+import logo from "../img/p/logo.png";
+import logo2x from "../img/p/logo@2x.png";
+
+import { Link, useMatch, useResolvedPath } from "react-router-dom";
+
 function Header() {
     const token = false;
     return (
-        <header>
-            <div className="logo">Toople</div>
+        <header className="header">
+            <div className="header__logo">
+                <picture>
+                    <Link to="/">
+                        <img src={logo} srcset={`${logo2x} 2x`} alt="logo" />
+                    </Link>
+                </picture>
+            </div>
             <nav>
                 <ul>
-                    <li>Курсы Moodle</li>
-                    <li>О сайте</li>
-                    {token && <li>Избранное</li>}
+                    <NavLink to="/courses">Курсы Moodle</NavLink>
+                    <NavLink to="/about">О сайте</NavLink>
                 </ul>
             </nav>
-            <div className="Profile">{!token && <button>Войти</button>}</div>
+            {!token && (
+                <Link to="/login">
+                    <button className="header__signup-btn">Войти</button>
+                </Link>
+            )}
         </header>
+    );
+}
+
+function NavLink({ to, children, ...props }) {
+    const resolvedPath = useResolvedPath(to);
+    const isActive = useMatch({ path: resolvedPath.pathname, end: true });
+    return (
+        <li className={isActive ? "active" : ""}>
+            <Link to={to} {...props}>
+                {children}
+            </Link>
+        </li>
     );
 }
 
