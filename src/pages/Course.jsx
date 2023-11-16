@@ -1,6 +1,11 @@
 import "../stylesheets/Course.scss";
 
+import { Link, useParams } from "react-router-dom";
+
 function Course() {
+    let { courseId } = useParams();
+    console.log(courseId);
+    // getCourse(courseId)
     const data = {
         tasks: [
             {
@@ -45,6 +50,7 @@ function Course() {
             },
         ],
     };
+    // const course = data.find()
     return (
         <div className="course">
             {/* <h1>Администрироварие информационных систем</h1>

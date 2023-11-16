@@ -11,7 +11,7 @@ function InputField({ placeholder, label, id, type, name, icon }) {
                 type={type}
             />
             {icon && (
-                <div class={classes.icon}>
+                <div className={classes.icon}>
                     <img src={icon} alt="icon" />
                 </div>
             )}

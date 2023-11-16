@@ -9,7 +9,7 @@ function Footer() {
             <div className="footer__left">
                 <div className="footer__logo">
                     <picture>
-                        <img src={logo} srcset={`${logo2x} 2x`} alt="logo" />
+                        <img src={logo} srcSet={`${logo2x} 2x`} alt="logo" />
                     </picture>
                 </div>
                 <div className="footer__copyright">

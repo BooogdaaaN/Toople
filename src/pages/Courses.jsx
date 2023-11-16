@@ -4,9 +4,12 @@ import InputField from "../components/UI/input_field/InputField.jsx";
 
 import searchIcon from "../img/i/search.svg";
 
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 function Courses() {
+    let { courseId } = useParams();
+
     const data = {
+        // getCourses
         coursesData: [
             {
                 courseId: 1,
