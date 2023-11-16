@@ -32,7 +32,7 @@ function Header() {
 
 function NavLink({ to, children, ...props }) {
     const resolvedPath = useResolvedPath(to);
-    const isActive = useMatch({ path: resolvedPath.pathname, end: true });
+    const isActive = useMatch({ path: resolvedPath.pathname, end: false });
     return (
         <li className={isActive ? "active" : ""}>
             <Link to={to} {...props}>
