@@ -11,18 +11,18 @@ function Header() {
             <div className="header__logo">
                 <picture>
                     <Link to="/">
-                        <img src={logo} srcset={`${logo2x} 2x`} alt="logo" />
+                        <img src={logo} srcSet={`${logo2x} 2x`} alt="logo" />
                     </Link>
                 </picture>
             </div>
             <nav>
                 <ul>
-                    <NavLink to="/courses">Курсы Moodle</NavLink>
-                    <NavLink to="/about">О сайте</NavLink>
+                    <NavLink to="courses">Курсы Moodle</NavLink>
+                    <NavLink to="about">О сайте</NavLink>
                 </ul>
             </nav>
             {!token && (
-                <Link to="/login">
+                <Link to="login">
                     <button className="header__signup-btn">Войти</button>
                 </Link>
             )}

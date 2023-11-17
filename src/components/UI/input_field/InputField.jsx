@@ -3,7 +3,7 @@ import classes from "./InputField.module.scss";
 function InputField({ placeholder, label, id, type, name, icon }) {
     return (
         <div className={classes.inputField}>
-            {label && <label for={label.for}>{label.text}</label>}
+            {label && <label htmlFor={label.for}>{label.text}</label>}
             <input
                 id={label ? label.for : id}
                 placeholder={placeholder}
@@ -11,7 +11,7 @@ function InputField({ placeholder, label, id, type, name, icon }) {
                 type={type}
             />
             {icon && (
-                <div class={classes.icon}>
+                <div className={classes.icon}>
                     <img src={icon} alt="icon" />
                 </div>
             )}
