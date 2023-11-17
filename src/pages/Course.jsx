@@ -18,13 +18,13 @@ function Course() {
                 doers: [
                     {
                         id: 1,
-                        doerName: "Делатель Админки 1",
+                        name: "Имя Делатель Админки 1",
                         doerVariantPrice: 400,
                         customerVariantPrice: 800,
                     },
                     {
                         id: 2,
-                        doerName: "Делатель Админки 2",
+                        name: "Имя Делатель Админки 2",
                         doerVariantPrice: 400,
                         customerVariantPrice: 800,
                     },
@@ -37,14 +37,14 @@ function Course() {
                 doers: [
                     {
                         id: 1,
-                        doerName: "Делатель задания 1",
+                        name: "Имя Делателя задания 1",
                         doerId: 1,
                         doerVariantPrice: 400,
                         customerVariantPrice: 800,
                     },
                     {
                         id: 2,
-                        doerName: "Делатель задания 2",
+                        name: "Имя Делателя задания 2",
                         doerVariantPrice: 300,
                         customerVariantPrice: 600,
                     },

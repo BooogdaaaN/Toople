@@ -1,4 +1,5 @@
 .courses {
+    padding: 3.2rem 0;
     .inputContainer {
         width: 94.4rem;
         margin: 0 auto;
@@ -7,7 +8,7 @@
         display: flex;
         width: 94.4rem;
         flex-wrap: wrap;
-        margin: 3.2rem auto;
+        margin: 3.2rem auto 0;
         gap: 6rem;
         li {
             list-style: none;

@@ -1,0 +1,12 @@
+@import "../main.scss";
+.doer-card {
+    padding: 1.6rem 3.2rem;
+    border-radius: 16px;
+    border: 1px solid $black;
+    width: 44.8rem;
+    height: 21.6rem;
+
+    .doer-card__top {
+        display: flex;
+    }
+}
