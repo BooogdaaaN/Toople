@@ -18,15 +18,15 @@ function Course() {
                 doers: [
                     {
                         id: 1,
-                        name: "Имя Делатель Админки 1",
+                        name: "Дмитрий",
                         doerVariantPrice: 400,
                         customerVariantPrice: 800,
                     },
                     {
                         id: 2,
-                        name: "Имя Делатель Админки 2",
+                        name: "Можноимясимфолов16",
                         doerVariantPrice: 400,
-                        customerVariantPrice: 800,
+                        customerVariantPrice: "-",
                     },
                 ],
             },

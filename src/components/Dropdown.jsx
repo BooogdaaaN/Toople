@@ -15,9 +15,11 @@ function Dropdown({ taskName, numberOfDoers, doers }) {
                     <img src={chevron} alt="chevron" />
                 </div>
                 <div>{taskName}</div>
-                <div className="dropdown__counter">
-                    <IconTemplate number={numberOfDoers} />
-                </div>
+                {!isOpen && (
+                    <div className="dropdown__counter">
+                        <IconTemplate number={numberOfDoers} />
+                    </div>
+                )}
             </button>
 
             {doers && (
