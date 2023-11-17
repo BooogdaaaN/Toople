@@ -4,42 +4,40 @@ import InputField from "../components/UI/input_field/InputField.jsx";
 
 import searchIcon from "../img/i/search.svg";
 
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 function Courses() {
-    let { courseId } = useParams();
-
     const data = {
         // getCourses
         coursesData: [
             {
-                courseId: 1,
-                courseName: "Администрироварие информационных сетей",
+                id: 1,
+                name: "Администрироварие информационных сетей",
                 teacherName: "Михайлова С. А.",
-                numberOfWorks: 10,
+                numberOfCompletedWorks: 10,
             },
             {
-                courseId: 2,
-                courseName: "Базы данных",
+                id: 2,
+                name: "Базы данных",
                 teacherName: "Наместников С. А.",
-                numberOfWorks: 2,
+                numberOfCompletedWorks: 2,
             },
             {
-                courseId: 3,
-                courseName: "Базы данных",
+                id: 3,
+                name: "Базы данных",
                 teacherName: "Наместников С. А.",
-                numberOfWorks: 2,
+                numberOfCompletedWorks: 2,
             },
             {
-                courseId: 4,
-                courseName: "Базы данных",
+                id: 4,
+                name: "Базы данных",
                 teacherName: "Наместников С. А.",
-                numberOfWorks: 2,
+                numberOfCompletedWorks: 2,
             },
             {
-                courseId: 5,
-                courseName: "Базы данных",
+                id: 5,
+                name: "Базы данных",
                 teacherName: "Наместников С. А.",
-                numberOfWorks: 2,
+                numberOfCompletedWorks: 2,
             },
         ],
     };
@@ -52,22 +50,24 @@ function Courses() {
                     id={"search"}
                 />
             </div>
-            <div className="coursesList">
-                {data.coursesData.map((courseData) => {
-                    return (
+            <ul className="coursesList">
+                {data.coursesData.map((courseData) => (
+                    <li key={courseData.id}>
                         <Link
-                            to={`/courses/${courseData.courseId}`}
+                            to={`/courses/${courseData.id}`}
                             style={{ textDecoration: "none", color: "black" }}
                         >
                             <CourseCard
-                                courseName={courseData.courseName}
+                                courseName={courseData.name}
                                 teacherName={courseData.teacherName}
-                                numberOfWorks={courseData.numberOfWorks}
+                                numberOfWorks={
+                                    courseData.numberOfCompletedWorks
+                                }
                             />
                         </Link>
-                    );
-                })}
-            </div>
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 }

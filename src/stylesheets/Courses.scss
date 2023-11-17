@@ -3,12 +3,15 @@
         width: 94.4rem;
         margin: 0 auto;
     }
-    .coursesList {
+    ul {
         display: flex;
         width: 94.4rem;
         flex-wrap: wrap;
         margin: 3.2rem auto;
         gap: 6rem;
+        li {
+            list-style: none;
+        }
         .course-card {
             flex-basis: calc(100% / 3 - 4rem);
         }

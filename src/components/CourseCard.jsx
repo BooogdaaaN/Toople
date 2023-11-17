@@ -1,6 +1,6 @@
 import "../stylesheets/CourseCard.scss";
 
-import IconCounter from "../components/UI/icon_counter/IconCounter.jsx";
+import IconTemplate from "../components/UI/icon_counter/IconTemplate.jsx";
 
 import iconWorkCompleted from "../img/i/work_completed.svg";
 function CourseCard({ courseName, teacherName, numberOfWorks }) {
@@ -11,7 +11,7 @@ function CourseCard({ courseName, teacherName, numberOfWorks }) {
             </div>
             <div className="course-card__bottom">
                 <div className="course-card__teacher">{teacherName}</div>
-                <IconCounter icon={iconWorkCompleted} number={numberOfWorks} />
+                <IconTemplate icon={iconWorkCompleted} number={numberOfWorks} />
             </div>
         </div>
     );
