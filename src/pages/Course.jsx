@@ -2,7 +2,8 @@ import "../stylesheets/Course.scss";
 
 import { useParams } from "react-router-dom";
 
-import Dropdown from "../components/Dropdown";
+import Dropdown from "../components/UI/dropdown_list/Dropdown_list";
+import DoerCard from "../components/DoerCard";
 
 function Course() {
     let { courseId } = useParams();
@@ -52,6 +53,7 @@ function Course() {
             },
         ],
     };
+
     return (
         <div className="course">
             <h1>{data.courseName}</h1>
@@ -62,7 +64,9 @@ function Course() {
                         <Dropdown
                             taskName={task.name}
                             numberOfDoers={task.numberOfDoers}
-                            doers={task.doers}
+                            elements={task.doers.map((doer) => (
+                                <DoerCard doer={doer} />
+                            ))}
                         />
                     </li>
                 ))}

@@ -1,4 +1,4 @@
-@import "../main.scss";
+@import "../../../main.scss";
 .dropdown {
     button {
         width: 100%;
@@ -22,7 +22,7 @@
         margin-left: auto;
     }
 
-    &__doers-list {
+    &__doersList {
         position: relative;
 
         display: grid;
@@ -51,7 +51,7 @@
             opacity: 0.3;
         }
     }
-    &.open &__doers-list {
+    &.open &__doersList {
         grid-template-rows: 1fr;
     }
 }

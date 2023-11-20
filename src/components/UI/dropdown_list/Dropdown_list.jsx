@@ -1,38 +1,35 @@
-import "../stylesheets/Dropdown.scss";
+import classes from "./Dropdown_list.module.scss";
 
 import { useState } from "react";
 
-import IconTemplate from "../components/UI/icon_template/IconTemplate.jsx";
-import DoerCard from "../components/DoerCard.jsx";
+import IconTemplate from "../icon_template/IconTemplate.jsx";
 
-import chevron from "../img/i/chevron.svg";
-function Dropdown({ taskName, numberOfDoers, doers }) {
+import chevron from "./chevron.svg";
+function Dropdown({ taskName, numberOfDoers, elements }) {
     const [isOpen, setIsOpen] = useState(false);
     return (
-        <div className={`dropdown ${isOpen ? "open" : ""}`}>
+        <div className={`${classes.dropdown} ${isOpen ? classes.open : ""}`}>
             <button onClick={() => setIsOpen(!isOpen)}>
-                <div className="dropdown__chevron">
+                <div className={`${classes.dropdown__chevron}`}>
                     <img src={chevron} alt="chevron" />
                 </div>
                 <div>{taskName}</div>
                 {!isOpen && (
-                    <div className="dropdown__counter">
+                    <div className={`${classes.dropdown__counter}`}>
                         <IconTemplate number={numberOfDoers} />
                     </div>
                 )}
             </button>
 
-            {doers && (
-                <div className="dropdown__doers-list">
+            {elements && (
+                <div className={`${classes.dropdown__doersList}`}>
                     <div
-                        className="dropdown__wrapper"
+                        className={`${classes.dropdown__wrapper}`}
                         style={{ minHeight: "0" }}
                     >
                         <ul>
-                            {doers.map((doer) => (
-                                <li key={doer.id}>
-                                    <DoerCard doer={doer} />
-                                </li>
+                            {elements.map((element, index) => (
+                                <li key={index}>{element}</li>
                             ))}
                         </ul>
                     </div>
