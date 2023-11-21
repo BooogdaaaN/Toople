@@ -5,7 +5,7 @@ import { useState } from "react";
 import IconTemplate from "../icon_template/IconTemplate.jsx";
 
 import chevron from "./chevron.svg";
-function Dropdown({ taskName, numberOfDoers, elements }) {
+function Dropdown({ name, numberOfElements, elements }) {
     const [isOpen, setIsOpen] = useState(false);
     return (
         <div className={`${classes.dropdown} ${isOpen ? classes.open : ""}`}>
@@ -13,10 +13,10 @@ function Dropdown({ taskName, numberOfDoers, elements }) {
                 <div className={`${classes.dropdown__chevron}`}>
                     <img src={chevron} alt="chevron" />
                 </div>
-                <div>{taskName}</div>
+                <div>{name}</div>
                 {!isOpen && (
                     <div className={`${classes.dropdown__counter}`}>
-                        <IconTemplate number={numberOfDoers} />
+                        <IconTemplate number={numberOfElements} />
                     </div>
                 )}
             </button>

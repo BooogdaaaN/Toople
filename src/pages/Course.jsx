@@ -62,8 +62,8 @@ function Course() {
                 {data.tasks.map((task, index) => (
                     <li key={task.id}>
                         <Dropdown
-                            taskName={task.name}
-                            numberOfDoers={task.numberOfDoers}
+                            name={task.name}
+                            numberOfElements={task.numberOfDoers}
                             elements={task.doers.map((doer) => (
                                 <DoerCard doer={doer} />
                             ))}
