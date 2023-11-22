@@ -1,0 +1,19 @@
+@import "../main.scss";
+
+.createAd {
+    padding: 3.2rem 0;
+
+    h1 {
+        font-weight: 700;
+        font-size: 3.5rem;
+    }
+
+    &__form {
+        display: flex;
+        margin-top: 1.6rem;
+    }
+
+    &__courseForm {
+        width: 36.8rem;
+    }
+}

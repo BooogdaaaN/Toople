@@ -1,4 +1,4 @@
-// import "../stylesheets/CreateAd.scss";
+import "../stylesheets/CreateAd.scss";
 import SelectList from "../components/SelectList.jsx";
 import ElementToSelect from "../components/ElementToSelect.jsx";
 import { coursesData, tasksData } from "../data.js";
@@ -18,12 +18,16 @@ function CreateAd() {
     return (
         <div className="createAd">
             <h1>Разместить объявление</h1>
-            <SelectList
-                title="course"
-                method={"post"}
-                action={""}
-                elements={listCourseElements}
-            />
+            <div className="createAd__form">
+                <div className="createAd__courseForm">
+                    <SelectList
+                        title="Курс"
+                        method={"post"}
+                        action={""}
+                        elements={listCourseElements}
+                    />
+                </div>
+            </div>
         </div>
     );
 }
