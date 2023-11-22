@@ -1,36 +1,40 @@
 @import "../main.scss";
 
 .footer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
     margin-top: auto;
-    display: flex;
-    font-size: 2rem;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
     padding: 1.6rem 0;
+    font-size: 2rem;
+
     span {
-        font-family: "NunitoSans";
+        font-family: NunitoSans, sans-serif;
     }
+
     hr {
+        position: absolute;
         top: 0;
         width: 100%;
-        position: absolute;
         opacity: 0.2;
     }
+
     &__logo {
         img {
             max-width: 9rem;
         }
+
         margin-bottom: 1.6rem;
     }
 
     &__contacts {
-        font-family: "NunitoSans";
         display: flex;
+        gap: 1.6rem;
         justify-content: flex-end;
         margin-top: 1.6rem;
         font-weight: 500;
-        gap: 1.6rem;
+        font-family: NunitoSans, sans-serif;
     }
 }

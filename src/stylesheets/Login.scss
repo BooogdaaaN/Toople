@@ -1,24 +1,25 @@
 @import "../main.scss";
+
 .login {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    align-items: center;
     width: 36.8rem;
     margin: 3.2rem auto 6.4rem;
     padding: 3.2rem 6rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.6rem;
     font-size: 2rem;
-
     border: 1px solid $grey;
     border-radius: 3rem;
 
     &__title {
-        font-size: 3.5rem;
-        font-weight: 600;
         color: $primary;
+        font-weight: 600;
+        font-size: 3.5rem;
+
         span {
             color: $accent;
-            font-family: "DaysOne";
+            font-family: DaysOne, sans-serif;
         }
     }
 
@@ -27,21 +28,24 @@
         flex-direction: column;
         gap: 1.6rem;
         width: 28rem;
+
         label {
             font-weight: 500;
         }
+
         input[type="submit"] {
             height: 4rem;
-            border: none;
             margin-top: 1.6rem;
-            background-color: $primary;
-            border-radius: 0.8rem;
             color: $white;
             font-size: 2rem;
+            background-color: $primary;
+            border: none;
+            border-radius: 0.8rem;
             transition: 0.1s;
+
             @include hover {
-                cursor: pointer;
                 transform: translateY(-2px);
+                cursor: pointer;
             }
         }
     }
@@ -49,11 +53,12 @@
     &__or {
         font-weight: 500;
     }
+
     &__signup {
         font-size: 2rem;
-        border: none;
-        background-color: $white;
         text-decoration: underline;
+        background-color: $white;
+        border: none;
         cursor: pointer;
     }
 }
