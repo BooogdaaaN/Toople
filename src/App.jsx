@@ -12,6 +12,7 @@ import About from "./pages/About.jsx";
 import Courses from "./pages/Courses.jsx";
 import Course from "./pages/Course.jsx";
 import Profile from "./pages/Profile.jsx";
+import CreateAd from "./pages/CreateAd.jsx";
 
 import { Route, Routes } from "react-router-dom";
 function App() {
@@ -32,6 +33,7 @@ function App() {
                         <Route index element={<Courses />} />
                         <Route path=":courseId" element={<Course />} />
                     </Route>
+                    <Route path="create" element={<CreateAd />} />
                 </Route>
             </Routes>
         </BrowserRouter>
