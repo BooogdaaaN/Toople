@@ -1,18 +1,22 @@
 .courses {
     padding: 3.2rem 0;
+
     .inputContainer {
         width: 94.4rem;
         margin: 0 auto;
     }
+
     ul {
         display: flex;
-        width: 94.4rem;
         flex-wrap: wrap;
-        margin: 3.2rem auto 0;
         gap: 6rem;
+        width: 94.4rem;
+        margin: 3.2rem auto 0;
+
         li {
             list-style: none;
         }
+
         .course-card {
             flex-basis: calc(100% / 3 - 4rem);
         }
