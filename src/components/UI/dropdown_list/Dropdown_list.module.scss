@@ -40,13 +40,13 @@
         }
 
         li {
-            padding-left: 11.2rem;
+            padding-left: 10%;
         }
 
         &::before {
             position: absolute;
             top: 0;
-            left: 9.6rem;
+            left: 8.4%;
             width: 1px;
             height: 100%;
             background-color: $black;
