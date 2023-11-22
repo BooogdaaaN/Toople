@@ -5,6 +5,7 @@ import { coursesData, tasksData } from "../data.js";
 import Dropdown from "../components/UI/dropdown_list/Dropdown_list";
 import { useEffect, useState } from "react";
 import ProfileCompletedElement from "../components/ProfileCompletedElement.jsx";
+import Margott from "../img/p/margott.jpg";
 
 function Profile() {
     const data = {
@@ -39,6 +40,7 @@ function Profile() {
     };
     const person = data.profile;
     const [completedCourses, setCompletedCourses] = useState([]);
+    const [amountOfCompleted, setAmountOfCompleted] = useState(0);
     useEffect(() => {
         setCompletedCourses(
             person.completed.map((personCourse) => {
@@ -47,6 +49,10 @@ function Profile() {
                 const completedTasks = personCourse.tasks.map((personTask) => {
                     // const task = getTaskById(personTask.id)
                     const task = tasksData.tasks[0];
+                    setAmountOfCompleted(
+                        (prev) => prev + personTask.timesCompleted
+                    );
+
                     return {
                         taskName: task.name,
                         timesCompleted: personTask.timesCompleted,
@@ -60,12 +66,11 @@ function Profile() {
             })
         );
     }, []);
-    console.log(completedCourses);
 
     return (
         <div className="profile">
             <div className="profile__photo">
-                <img src="" alt="" />
+                <img src={Margott} alt="ava" />
             </div>
             <div className="profile__info">
                 <div className="profile__name">{`${person.surName} ${person.name}`}</div>
@@ -80,7 +85,7 @@ function Profile() {
                 <div className="profile__completedTasks">
                     <Dropdown
                         name={"Выполненные работы"}
-                        numberOfElements={person.completed.length}
+                        numberOfElements={amountOfCompleted}
                         elements={completedCourses.map((course, index) => (
                             <ProfileCompletedElement {...course} />
                         ))}
