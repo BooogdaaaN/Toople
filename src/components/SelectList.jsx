@@ -2,7 +2,15 @@ import { useEffect, useMemo, useState } from "react";
 import "../stylesheets/SelectList.scss";
 import InputField from "./UI/input_field/InputField";
 import BlueButton from "../components/UI/blue_button/BlueButton.jsx";
-function SelectList({ title, elements, onAdd }) {
+function SelectList({
+    title,
+    name,
+    elements,
+    onAdd,
+    onSelect,
+    buttonTitle,
+    value,
+}) {
     const [searchQuery, setSearchQuery] = useState("");
     const [displayedElements, setDisplayedElements] = useState(elements);
 
@@ -40,17 +48,23 @@ function SelectList({ title, elements, onAdd }) {
                     <div key={index} className="selectList__element">
                         <input
                             type="radio"
-                            id={index}
-                            name="selectList"
+                            id={element.value}
+                            name={name}
                             value={element.value}
+                            checked={element.value === value}
+                            onChange={() => {
+                                onSelect(element.value);
+                            }}
                         />
-                        <label htmlFor={index}>{element.elementToDislay}</label>
+                        <label htmlFor={element.value}>
+                            {element.elementToDislay}
+                        </label>
                     </div>
                 ))}
             </fieldset>
 
             <div className="selectList__addBtn">
-                <BlueButton onClick={onAdd}>Добавить другой курс</BlueButton>
+                <BlueButton onClick={onAdd}>{buttonTitle}</BlueButton>
             </div>
         </div>
     );

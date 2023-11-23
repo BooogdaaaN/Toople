@@ -2,13 +2,28 @@ import "../stylesheets/CreateAd.scss";
 import SelectList from "../components/SelectList.jsx";
 import ElementToSelect from "../components/ElementToSelect.jsx";
 import AddCourseForm from "../components/AddCourseForm.jsx";
+import AddTaskForm from "../components/AddTaskForm.jsx";
 import PopUp from "../components/UI/popUp/PopUp.jsx";
 import { useEffect, useState } from "react";
 import { coursesData, tasksData } from "../data.js";
 function CreateAd() {
-    const [isAddingCourse, setIsAddingCourse] = useState(false);
     const [listCourseElements, setListCourseElements] = useState([]);
+    const [listTaskElements, setListTaskElements] = useState([]);
 
+    const [isAddingCourse, setIsAddingCourse] = useState(false);
+    const [isAddingTask, setIsAddingTask] = useState(false);
+
+    const [selectedCourse, setSelectedCourse] = useState();
+    const [selectedTask, setSelectedTask] = useState();
+
+    console.log(selectedCourse, selectedTask);
+    function handleSelectCourse(selected) {
+        setSelectedCourse(selected);
+        setSelectedTask(undefined);
+    }
+    function handleSelectTask(selected) {
+        setSelectedTask(selected);
+    }
     useEffect(() => {
         setListCourseElements(
             coursesData.courses.map((course) => ({
@@ -21,6 +36,15 @@ function CreateAd() {
                 value: course.id,
                 sortBy: course.name,
                 searchBy: [course.name, course.teacherName],
+            }))
+        );
+        setListTaskElements(
+            tasksData.tasks.map((task) => ({
+                elementToDislay: <ElementToSelect title={task.name} />,
+                value: task.id,
+                sortBy: task.name,
+                searchBy: [task.name],
+                courseId: task.courseID,
             }))
         );
     }, []);
@@ -36,9 +60,23 @@ function CreateAd() {
                         subtitle={newTeacherName}
                     />
                 ),
-                value: "newId",
+                value: "newCourseId",
                 sortBy: "newElement",
                 searchBy: [newCourseName, newTeacherName],
+            },
+        ]);
+    }
+
+    function addNewtask(newTaskName) {
+        setIsAddingTask(false);
+        setListTaskElements((prev) => [
+            ...prev,
+            {
+                elementToDislay: <ElementToSelect title={newTaskName} />,
+                value: "newTaskId",
+                sortBy: "newElement",
+                searchBy: [newTaskName],
+                courseId: selectedCourse,
             },
         ]);
     }
@@ -46,19 +84,41 @@ function CreateAd() {
         <div className="createAd">
             <h1>Разместить объявление</h1>
             <div className="createAd__form">
-                <div className="createAd__courseForm">
+                <div className="createAd__subForm">
                     <SelectList
-                        title="Курс"
+                        name="courseList"
+                        value={selectedCourse}
                         elements={listCourseElements}
                         onAdd={() => setIsAddingCourse(true)}
+                        onSelect={handleSelectCourse}
+                        title="Курс"
+                        buttonTitle={"Добавить другой курс"}
                     />
                 </div>
+                {selectedCourse && (
+                    <div className="createAd__subForm">
+                        <SelectList
+                            name="taskList"
+                            value={selectedTask}
+                            elements={listTaskElements.filter(
+                                (task) => task.courseId === selectedCourse
+                            )}
+                            onAdd={() => setIsAddingTask(true)}
+                            onSelect={handleSelectTask}
+                            title="Задание"
+                            buttonTitle={"Добавить другое задание"}
+                        />
+                    </div>
+                )}
             </div>
             <PopUp
                 isOpen={isAddingCourse}
                 onClose={() => setIsAddingCourse(false)}
             >
                 <AddCourseForm onSubmit={addNewCourse} />
+            </PopUp>
+            <PopUp isOpen={isAddingTask} onClose={() => setIsAddingTask(false)}>
+                <AddTaskForm onSubmit={addNewtask} />
             </PopUp>
         </div>
     );
