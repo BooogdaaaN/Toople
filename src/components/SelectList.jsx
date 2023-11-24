@@ -44,6 +44,11 @@ function SelectList({
             </div>
 
             <fieldset>
+                {displayedElements.length === 0 && (
+                    <div className="selectList__empty">
+                        Пока никто не добавил{" "}
+                    </div>
+                )}
                 {displayedElements.map((element, index) => (
                     <div key={index} className="selectList__element">
                         <input

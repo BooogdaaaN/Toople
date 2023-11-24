@@ -12,7 +12,7 @@ function AddTaskForm({ onSubmit }) {
         <div className="addCourseForm">
             <form>
                 <InputField
-                    placeholder={"Задание"}
+                    placeholder={"Название задания"}
                     label={{ text: "Задание", for: "taskName" }}
                     onChange={(e) => setNewTaskName(e.target.value)}
                 />

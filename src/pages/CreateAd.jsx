@@ -4,6 +4,7 @@ import ElementToSelect from "../components/ElementToSelect.jsx";
 import AddCourseForm from "../components/AddCourseForm.jsx";
 import AddTaskForm from "../components/AddTaskForm.jsx";
 import PopUp from "../components/UI/popUp/PopUp.jsx";
+import SetPrice from "../components/SetPrice.jsx";
 import { useEffect, useState } from "react";
 import { coursesData, tasksData } from "../data.js";
 function CreateAd() {
@@ -15,8 +16,9 @@ function CreateAd() {
 
     const [selectedCourse, setSelectedCourse] = useState();
     const [selectedTask, setSelectedTask] = useState();
+    const [customerVariantPrice, setCustomerVariantPrice] = useState();
+    const [doerVariantPrice, setDoerVariantPrice] = useState();
 
-    console.log(selectedCourse, selectedTask);
     function handleSelectCourse(selected) {
         setSelectedCourse(selected);
         setSelectedTask(undefined);
@@ -80,6 +82,11 @@ function CreateAd() {
             },
         ]);
     }
+
+    function publish() {
+        console.log(selectedCourse, selectedTask);
+        console.log(customerVariantPrice, doerVariantPrice);
+    }
     return (
         <div className="createAd">
             <h1>Разместить объявление</h1>
@@ -107,6 +114,17 @@ function CreateAd() {
                             onSelect={handleSelectTask}
                             title="Задание"
                             buttonTitle={"Добавить другое задание"}
+                        />
+                    </div>
+                )}
+                {selectedTask && (
+                    <div className="createAd__priceSubForm">
+                        <SetPrice
+                            title="Цена"
+                            buttonTitle="Опубликовать"
+                            settingCustomerPrice={setCustomerVariantPrice}
+                            settingDoerPrice={setDoerVariantPrice}
+                            publish={publish}
                         />
                     </div>
                 )}
