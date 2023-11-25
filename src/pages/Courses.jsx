@@ -3,9 +3,10 @@ import CourseCard from "../components/CourseCard.jsx";
 import InputField from "../components/UI/input_field/InputField.jsx";
 
 import searchIcon from "../img/i/search.svg";
-
+import { coursesData } from "../data.js";
 import { Link } from "react-router-dom";
 function Courses() {
+    ///courses[GET]
     const data = {
         // getCourses
         coursesData: [

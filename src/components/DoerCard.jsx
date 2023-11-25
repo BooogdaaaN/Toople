@@ -27,7 +27,7 @@ function DoerCard({ doer }) {
                 </div>
             </div>
             <div className="doer-card__bottom">
-                <Link className="doer-card__contact" to="/">
+                <Link className="doer-card__contact" to={`/profile/${doer.id}`}>
                     Перейти
                 </Link>
             </div>

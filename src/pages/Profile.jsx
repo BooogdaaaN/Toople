@@ -8,63 +8,51 @@ import ProfileCompletedElement from "../components/ProfileCompletedElement.jsx";
 import Margott from "../img/p/margott.jpg";
 
 function Profile() {
+    // profile/id[GET](user.id)
     const data = {
-        // getCourses
-        profile: {
-            name: "Богдан",
-            surName: "Рассказов",
-            contacts: [
-                {
-                    type: "e-mail",
-                    value: "fakeemail@gmail.com",
-                },
-                {
-                    type: "telegram",
-                    value: "https://t.me/fakeTg",
-                },
-            ],
-            completed: [
-                {
-                    courseID: 1,
-                    tasks: [
-                        { id: 12, timesCompleted: 5 },
-                        { id: 13, timesCompleted: 4 },
-                    ],
-                },
-                {
-                    courseID: 2,
-                    tasks: [{ id: 24, timesCompleted: 5 }],
-                },
-            ],
-        },
+        name: "Богдан",
+        surName: "Рассказов",
+        contacts: [
+            {
+                type: "e-mail",
+                value: "fakeemail@gmail.com",
+            },
+            {
+                type: "telegram",
+                value: "https://t.me/fakeTg",
+            },
+        ],
+        completed: [
+            {
+                courseName: "Администрирование информационных систем",
+                teacherName: "Михайлова С.А",
+                tasks: [
+                    {
+                        taskName:
+                            "Практическое занятие 1.  длинное названиеболее длинное название",
+                        timesCompleted: 5,
+                    },
+                    {
+                        taskName: "Практическое занятие 2. ",
+                        timesCompleted: 4,
+                    },
+                ],
+            },
+            {
+                courseName: "Базы данных",
+                teacherName: "Наметсников С.А",
+                tasks: [
+                    {
+                        taskName: "Практическое занятие 1 БД",
+                        timesCompleted: 5,
+                    },
+                ],
+            },
+        ],
+        timesCompleted: 14,
     };
-    const person = data.profile;
-    const [completedCourses, setCompletedCourses] = useState([]);
-    const [amountOfCompleted, setAmountOfCompleted] = useState(0);
     useEffect(() => {
-        setCompletedCourses(
-            person.completed.map((personCourse) => {
-                //const course = getCourseByID(personsCourse.coursesID)
-                const course = coursesData.courses[0];
-                const completedTasks = personCourse.tasks.map((personTask) => {
-                    // const task = getTaskById(personTask.id)
-                    const task = tasksData.tasks[0];
-                    setAmountOfCompleted(
-                        (prev) => prev + personTask.timesCompleted
-                    );
-
-                    return {
-                        taskName: task.name,
-                        timesCompleted: personTask.timesCompleted,
-                    };
-                });
-                return {
-                    courseName: course.name,
-                    teacherName: course.teacherName,
-                    tasks: completedTasks,
-                };
-            })
-        );
+        // get req
     }, []);
 
     return (
@@ -73,9 +61,9 @@ function Profile() {
                 <img src={Margott} alt="ava" />
             </div>
             <div className="profile__info">
-                <div className="profile__name">{`${person.surName} ${person.name}`}</div>
+                <div className="profile__name">{`${data.surName} ${data.name}`}</div>
                 <div className="profile__contacts">
-                    {person.contacts.map((contact, index) => (
+                    {data.contacts.map((contact, index) => (
                         <div key={index} className={`profile__${contact.type}`}>
                             {`${contact.type}: `}
                             <span>{contact.value}</span>
@@ -85,8 +73,8 @@ function Profile() {
                 <div className="profile__completedTasks">
                     <Dropdown
                         name={"Выполненные работы"}
-                        numberOfElements={amountOfCompleted}
-                        elements={completedCourses.map((course, index) => (
+                        numberOfElements={data.timesCompleted}
+                        elements={data.completed.map((course) => (
                             <ProfileCompletedElement {...course} />
                         ))}
                     />

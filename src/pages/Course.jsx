@@ -7,44 +7,44 @@ import DoerCard from "../components/DoerCard";
 
 function Course() {
     let { courseId } = useParams();
-    // getCourse(courseId)
+    //courseData[GET](course.id)
     const data = {
         courseName: "Администрирование информационных систем",
         teacherName: "Михайлова С.А",
         tasks: [
             {
-                id: 1,
+                id: 12,
                 name: "Практическое занятие 1. Общие сведения о системном администрировании",
                 numberOfDoers: 2,
                 doers: [
                     {
                         id: 1,
-                        name: "Дмитрий",
+                        name: "Богдан",
                         doerVariantPrice: 400,
                         customerVariantPrice: 800,
                     },
                     {
                         id: 2,
-                        name: "Можноимясимфолов16",
+                        name: "Юльча",
                         doerVariantPrice: 400,
-                        customerVariantPrice: "-",
+                        customerVariantPrice: 12000,
                     },
                 ],
             },
             {
-                id: 2,
+                id: 13,
                 name: "Практическое занятие 2. Интернет жопы запросы ООООчень длинное название капец какое длинное просто вообращить не вомзхможно рельно",
                 numberOfDoers: 3,
                 doers: [
                     {
-                        id: 1,
+                        id: 3,
                         name: "Имя Делателя задания 1",
                         doerId: 1,
                         doerVariantPrice: 400,
                         customerVariantPrice: 800,
                     },
                     {
-                        id: 2,
+                        id: 4,
                         name: "Имя Делателя задания 2",
                         doerVariantPrice: 300,
                         customerVariantPrice: 600,
