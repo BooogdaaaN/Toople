@@ -3,9 +3,11 @@ import logo from "../img/p/logo.png";
 import logo2x from "../img/p/logo@2x.png";
 
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
-
+import { useContext } from "react";
+import { AuthContext } from "../context/index.js";
 function Header() {
     const token = false;
+    const isAuth = useContext(AuthContext);
     return (
         <header className="header">
             <div className="header__logo">
