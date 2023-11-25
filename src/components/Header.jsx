@@ -6,8 +6,8 @@ import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/index.js";
 function Header() {
-    const token = false;
-    const isAuth = useContext(AuthContext);
+    const context = useContext(AuthContext);
+    const isAuth = context.isAuth;
     return (
         <header className="header">
             <div className="header__logo">
@@ -20,10 +20,14 @@ function Header() {
             <nav>
                 <ul>
                     <NavLink to="courses">Курсы Moodle</NavLink>
+                    {isAuth && <NavLink to="profile/me">Профиль</NavLink>}
+                    {isAuth && (
+                        <NavLink to="create">Разместить задание</NavLink>
+                    )}
                     <NavLink to="about">О сайте</NavLink>
                 </ul>
             </nav>
-            {!token && (
+            {!isAuth && (
                 <Link to="login">
                     <button className="header__signup-btn">Войти</button>
                 </Link>

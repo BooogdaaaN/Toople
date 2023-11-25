@@ -17,8 +17,8 @@ import { AuthContext } from "./context/index.js";
 import { useState } from "react";
 
 function App() {
-    const [isAuth, setIsAuth] = useState(false);
-    console.log(isAuth);
+    const [isAuth, setIsAuth] = useState(true);
+
     return (
         <AuthContext.Provider
             value={{
@@ -37,9 +37,7 @@ function App() {
                             <Route path=":courseId" element={<Course />} />
                         </Route>
                         {isAuth && (
-                            <Route path="profile" element={<ProfileLayout />}>
-                                <Route index element={<Profile />} />
-                            </Route>
+                            <Route path="profile/:id" element={<Profile />} />
                         )}
                         {isAuth && (
                             <Route path="create" element={<CreateAd />} />

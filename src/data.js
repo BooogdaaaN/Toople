@@ -47,4 +47,38 @@ const tasksData = {
     ],
 };
 
-export { tasksData, coursesData };
+const usersData = {
+    users: [
+        {
+            id: 1,
+            name: "Богдан",
+            surName: "Рассказов",
+            email: "fakeemail@gmail.com",
+            password: "hashedpasswfwe32r@213",
+            contacts: [
+                {
+                    type: "e-mail",
+                    value: "fakeemail@gmail.com",
+                },
+                {
+                    type: "telegram",
+                    value: "https://t.me/fakeTg",
+                },
+            ],
+            completed: [
+                {
+                    courseID: 1,
+                    tasks: [
+                        { id: 12, timesCompleted: 5 },
+                        { id: 13, timesCompleted: 4 },
+                    ],
+                },
+                {
+                    courseID: 2,
+                    tasks: [{ id: 24, timesCompleted: 5 }],
+                },
+            ],
+        },
+    ],
+};
+export { tasksData, coursesData, usersData };
