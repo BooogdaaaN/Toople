@@ -1,4 +1,4 @@
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import "./stylesheets/App.scss";
 
@@ -13,30 +13,39 @@ import Courses from "./pages/Courses.jsx";
 import Course from "./pages/Course.jsx";
 import Profile from "./pages/Profile.jsx";
 import CreateAd from "./pages/CreateAd.jsx";
+import { AuthContext } from "./context/index.js";
+import { useState } from "react";
 
-import { Route, Routes } from "react-router-dom";
 function App() {
-    return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<RootLayout />}>
-                    <Route index element={<Home />} />
-                    <Route path="login" element={<Login />} />
-                    <Route path="about" element={<About />} />
-                    <Route path="profile" element={<ProfileLayout />}>
-                        <Route index element={<Profile />} />
-                        {/* <Route path="edit" element={<EditProfile />} /> */}
-                        {/* <Route path=":userId" element={<Doer />} /> */}
-                    </Route>
+    const [isAuth, setIsAuth] = useState(true);
 
-                    <Route path="courses" element={<CoursesLayout />}>
-                        <Route index element={<Courses />} />
-                        <Route path=":courseId" element={<Course />} />
+    return (
+        <AuthContext.Provider
+            value={{
+                isAuth,
+                setIsAuth,
+            }}
+        >
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<RootLayout />}>
+                        <Route index element={<Home />} />
+                        <Route path="login" element={<Login />} />
+                        <Route path="about" element={<About />} />
+                        <Route path="courses" element={<CoursesLayout />}>
+                            <Route index element={<Courses />} />
+                            <Route path=":courseId" element={<Course />} />
+                        </Route>
+                        {isAuth && (
+                            <Route path="profile/:id" element={<Profile />} />
+                        )}
+                        {isAuth && (
+                            <Route path="create" element={<CreateAd />} />
+                        )}
                     </Route>
-                    <Route path="create" element={<CreateAd />} />
-                </Route>
-            </Routes>
-        </BrowserRouter>
+                </Routes>
+            </BrowserRouter>
+        </AuthContext.Provider>
     );
 }
 
