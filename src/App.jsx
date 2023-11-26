@@ -4,8 +4,6 @@ import "./stylesheets/App.scss";
 
 import RootLayout from "./layouts/RootLayout.jsx";
 import CoursesLayout from "./layouts/CoursesLayout.jsx";
-import ProfileLayout from "./layouts/CoursesLayout.jsx";
-
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import About from "./pages/About.jsx";
@@ -37,7 +35,13 @@ function App() {
                             <Route path=":courseId" element={<Course />} />
                         </Route>
                         {isAuth && (
-                            <Route path="profile/:id" element={<Profile />} />
+                            <Route path="profile" element={<CoursesLayout />}>
+                                <Route index element={<Profile />} />
+                                <Route
+                                    path=":profileId"
+                                    element={<Profile />}
+                                />
+                            </Route>
                         )}
                         {isAuth && (
                             <Route path="create" element={<CreateAd />} />

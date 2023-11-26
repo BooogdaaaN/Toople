@@ -10,7 +10,6 @@ import { coursesData, tasksData } from "../data.js";
 function CreateAd() {
     const [listCourseElements, setListCourseElements] = useState([]);
     const [listTaskElements, setListTaskElements] = useState([]);
-
     const [isAddingCourse, setIsAddingCourse] = useState(false);
     const [isAddingTask, setIsAddingTask] = useState(false);
 
@@ -18,7 +17,6 @@ function CreateAd() {
     const [selectedTask, setSelectedTask] = useState();
     const [customerVariantPrice, setCustomerVariantPrice] = useState();
     const [doerVariantPrice, setDoerVariantPrice] = useState();
-
     function handleSelectCourse(selected) {
         setSelectedCourse(selected);
         setSelectedTask(undefined);

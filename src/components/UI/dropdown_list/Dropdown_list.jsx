@@ -9,7 +9,10 @@ function Dropdown({ name, numberOfElements, elements }) {
     const [isOpen, setIsOpen] = useState(false);
     return (
         <div className={`${classes.dropdown} ${isOpen ? classes.open : ""}`}>
-            <button onClick={() => setIsOpen(!isOpen)}>
+            <button
+                className={classes.dropdown__btn}
+                onClick={() => setIsOpen(!isOpen)}
+            >
                 <div className={`${classes.dropdown__chevron}`}>
                     <img src={chevron} alt="chevron" />
                 </div>

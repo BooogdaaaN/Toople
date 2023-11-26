@@ -17,7 +17,6 @@ function useSearchFilter(elementsToFilter, setFilteredElements) {
             return false;
         });
         setFilteredElements(filteredElements);
-        console.log("redrawSearch");
     }
     return [searchBar];
 }
