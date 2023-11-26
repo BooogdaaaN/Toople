@@ -1,11 +1,13 @@
 import "../stylesheets/DoerCard.scss";
-import { Link } from "react-router-dom";
+
 import IconTemplate from "../components/UI/icon_template/IconTemplate.jsx";
 import iconTaskCompleted from "../img/i/taskCompleted.svg";
-import { useState } from "react";
-import { useContext } from "react";
-import { AuthContext } from "../context/index.js";
+
 import useAuthPopUp from "../hooks/useAuthPopUp.jsx";
+import { AuthContext } from "../context/index.js";
+
+import { useState, useContext } from "react";
+import { Link } from "react-router-dom";
 function DoerCard({ doer }) {
     const context = useContext(AuthContext);
     const isAuth = context.isAuth;

@@ -1,10 +1,9 @@
 import "../stylesheets/Courses.scss";
-import CourseCard from "../components/CourseCard.jsx";
-import InputField from "../components/UI/input_field/InputField.jsx";
 
-import searchIcon from "../img/i/search.svg";
-import { Link } from "react-router-dom";
+import CourseCard from "../components/CourseCard.jsx";
 import useSearchFilter from "../hooks/useSearchFilter.jsx";
+
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 function Courses() {
     const [coursesData, setCoursesData] = useState([]);

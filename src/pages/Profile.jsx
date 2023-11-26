@@ -1,14 +1,13 @@
 import "../stylesheets/Profile.scss";
-import user from "../img/i/user.svg";
 
-import { coursesData, tasksData } from "../data.js";
 import Dropdown from "../components/UI/dropdown_list/Dropdown_list";
-import { useEffect, useState } from "react";
 import ProfileCompletedElement from "../components/ProfileCompletedElement.jsx";
 import Margott from "../img/p/margott.jpg";
-import { useParams } from "react-router-dom";
 import editIcon from "../img/i/edit.svg";
 import EditProfile from "../components/EditProfile.jsx";
+
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 function Profile() {
     let { profileId } = useParams();
     const isMe = profileId === "me";

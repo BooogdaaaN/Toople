@@ -1,6 +1,8 @@
 import PopUp from "../components/UI/popUp/PopUp";
-import { useState } from "react";
+
 import RequireAuth from "../components/RequireAuth.jsx";
+
+import { useState } from "react";
 function useAuthPopUp() {
     const [isAuthPopUp, setIsAuthPopUp] = useState(false);
     const authPopUp = (

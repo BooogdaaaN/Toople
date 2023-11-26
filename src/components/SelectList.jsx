@@ -1,7 +1,9 @@
-import { useMemo, useState } from "react";
 import "../stylesheets/SelectList.scss";
+
 import BlueButton from "../components/UI/blue_button/BlueButton.jsx";
 import useSearchFilter from "../hooks/useSearchFilter.jsx";
+
+import { useMemo, useState } from "react";
 function SelectList({
     name,
     value,

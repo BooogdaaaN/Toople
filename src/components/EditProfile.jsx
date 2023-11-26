@@ -1,11 +1,15 @@
 import "../stylesheets/EditProfile.scss";
-import { useState } from "react";
+
 import InputField from "./UI/input_field/InputField";
 import BlueButton from "./UI/blue_button/BlueButton";
+
+import { useState } from "react";
 function EditProfile({ previuosData, onSubmit }) {
     const [data, setData] = useState(previuosData);
     function handleSubmit(e) {
-        if (hasUndefinedFields(data)) return;
+        if (hasUndefinedFields(data) || hasUndefinedFields(data.contacts))
+            return;
+        console.log(data);
         onSubmit(data);
     }
     return (

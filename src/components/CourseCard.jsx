@@ -1,8 +1,8 @@
 import "../stylesheets/CourseCard.scss";
 
 import IconTemplate from "../components/UI/icon_template/IconTemplate.jsx";
-
 import iconWorkCompleted from "../img/i/work_completed.svg";
+
 function CourseCard({ courseName, teacherName, numberOfWorks }) {
     return (
         <div className="course-card">

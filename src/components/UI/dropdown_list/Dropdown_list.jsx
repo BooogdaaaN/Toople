@@ -1,10 +1,9 @@
 import classes from "./Dropdown_list.module.scss";
 
-import { useState } from "react";
-
 import IconTemplate from "../icon_template/IconTemplate.jsx";
-
 import chevron from "./chevron.svg";
+
+import { useState } from "react";
 function Dropdown({ name, numberOfElements, elements }) {
     const [isOpen, setIsOpen] = useState(false);
     return (

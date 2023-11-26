@@ -1,5 +1,3 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-
 import "./stylesheets/App.scss";
 
 import RootLayout from "./layouts/RootLayout.jsx";
@@ -11,6 +9,8 @@ import Courses from "./pages/Courses.jsx";
 import Course from "./pages/Course.jsx";
 import Profile from "./pages/Profile.jsx";
 import CreateAd from "./pages/CreateAd.jsx";
+
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthContext } from "./context/index.js";
 import { useState } from "react";
 
