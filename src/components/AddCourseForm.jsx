@@ -1,6 +1,8 @@
 import "../stylesheets/AddCourseForm.scss";
+
 import InputField from "./UI/input_field/InputField";
 import BlueButton from "../components/UI/blue_button/BlueButton.jsx";
+
 import { useState } from "react";
 function AddCourseForm({ onSubmit }) {
     const [newCourseName, setNewCourseName] = useState("");

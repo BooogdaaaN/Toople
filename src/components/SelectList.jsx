@@ -1,47 +1,33 @@
-import { useEffect, useMemo, useState } from "react";
 import "../stylesheets/SelectList.scss";
-import InputField from "./UI/input_field/InputField";
+
 import BlueButton from "../components/UI/blue_button/BlueButton.jsx";
+import useSearchFilter from "../hooks/useSearchFilter.jsx";
+
+import { useMemo, useState } from "react";
 function SelectList({
-    title,
     name,
+    value,
     elements,
     onAdd,
     onSelect,
+    title,
     buttonTitle,
-    value,
 }) {
-    const [searchQuery, setSearchQuery] = useState("");
     const [displayedElements, setDisplayedElements] = useState(elements);
-
-    useEffect(() => {
-        setDisplayedElements(() => {
-            const sortedElements = [...elements].sort((a, b) => {
+    const [searchBar] = useSearchFilter(elements, setDisplayedElements);
+    useMemo(() => {
+        setDisplayedElements(() =>
+            [...elements].sort((a, b) => {
                 if (a["sortBy"] === "newElement") return -1;
                 return a["sortBy"]?.localeCompare(b["sortBy"]);
-            });
-            const filteredElements = sortedElements.filter((element) => {
-                const searchInArray = (element) =>
-                    element.toLowerCase().includes(searchQuery.toLowerCase());
-
-                if (element.searchBy.some(searchInArray)) return true;
-                return false;
-            });
-            return filteredElements;
-        });
-    }, [elements, searchQuery]);
+            })
+        );
+    }, [elements]);
 
     return (
         <div className="selectList">
             <div className="selectList__title">{title}</div>
-            <div className="selectList__search">
-                <InputField
-                    placeholder={"Поиск"}
-                    name="search"
-                    id="search"
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                />
-            </div>
+            <div className="selectList__search">{searchBar}</div>
 
             <fieldset>
                 {displayedElements.length === 0 && (

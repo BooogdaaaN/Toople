@@ -1,6 +1,6 @@
 import "../stylesheets/ProfileCompletedElement.scss";
-import IconTemplate from "./UI/icon_template/IconTemplate";
 
+import IconTemplate from "./UI/icon_template/IconTemplate";
 import useIcon from "../img/i/user.svg";
 function ProfileCompletedElement({ courseName, teacherName, tasks }) {
     return (

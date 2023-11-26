@@ -1,0 +1,17 @@
+@import "../main.scss";
+
+.requireAuth {
+    display: flex;
+    flex-direction: column;
+    gap: 3.2rem;
+    align-items: center;
+    width: 50rem;
+    padding: 4.2rem;
+    font-size: 2rem;
+    background-color: $white;
+    border-radius: 1rem;
+
+    a {
+        font-size: 2.4rem;
+    }
+}

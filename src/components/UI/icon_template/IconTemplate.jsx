@@ -1,10 +1,13 @@
 import classes from "./Icon_template.module.scss";
 
-function IconTemplate({ icon, number }) {
+function IconTemplate({ icon, number, color }) {
     return (
         <div className={classes.iconTemplate}>
             {icon && (
-                <div className={`${classes.icon} ${classes.circle}`}>
+                <div
+                    className={`${classes.icon} ${classes.circle}`}
+                    style={{ backgroundColor: color }}
+                >
                     <img src={icon} alt="icon" />
                 </div>
             )}

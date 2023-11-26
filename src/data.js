@@ -79,6 +79,30 @@ const usersData = {
                 },
             ],
         },
+        {
+            id: 2,
+            name: "Юльча",
+            surName: "Игуменова",
+            email: "gummy@gmail.com",
+            password: "hashedpasswfwe32r@213",
+            contacts: [
+                {
+                    type: "e-mail",
+                    value: "fakeemail@gmail.com",
+                },
+                {
+                    type: "vk",
+                    value: "https://vk.me/gummy",
+                },
+            ],
+            completed: [
+                {
+                    courseID: 2,
+                    tasks: [{ id: 24, timesCompleted: 6 }],
+                },
+            ],
+        },
     ],
 };
+
 export { tasksData, coursesData, usersData };

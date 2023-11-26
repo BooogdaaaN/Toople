@@ -1,6 +1,15 @@
 import classes from "./InputField.module.scss";
 
-function InputField({ placeholder, label, id, type, name, icon, onChange }) {
+function InputField({
+    placeholder,
+    label,
+    id,
+    type,
+    name,
+    icon,
+    onChange,
+    value,
+}) {
     return (
         <div className={classes.inputField}>
             {label && <label htmlFor={label.for}>{label.text}</label>}
@@ -10,6 +19,7 @@ function InputField({ placeholder, label, id, type, name, icon, onChange }) {
                 name={name}
                 type={type}
                 onChange={onChange}
+                value={value}
             />
             {icon && (
                 <div className={classes.icon}>

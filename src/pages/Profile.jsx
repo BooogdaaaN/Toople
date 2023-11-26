@@ -1,97 +1,105 @@
 import "../stylesheets/Profile.scss";
-import user from "../img/i/user.svg";
 
-import { coursesData, tasksData } from "../data.js";
 import Dropdown from "../components/UI/dropdown_list/Dropdown_list";
-import { useEffect, useState } from "react";
 import ProfileCompletedElement from "../components/ProfileCompletedElement.jsx";
 import Margott from "../img/p/margott.jpg";
+import editIcon from "../img/i/edit.svg";
+import EditProfile from "../components/EditProfile.jsx";
 
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 function Profile() {
-    const data = {
-        // getCourses
-        profile: {
+    let { profileId } = useParams();
+    const isMe = profileId === "me";
+    const [profileData, setProfileData] = useState();
+    const [isEditing, setIsEditing] = useState(false);
+    useEffect(() => {
+        const data = {
             name: "Богдан",
             surName: "Рассказов",
-            contacts: [
-                {
-                    type: "e-mail",
-                    value: "fakeemail@gmail.com",
-                },
-                {
-                    type: "telegram",
-                    value: "https://t.me/fakeTg",
-                },
-            ],
+            contacts: {
+                type: "telegram",
+                value: "https://t.me/fakeTg",
+            },
             completed: [
                 {
-                    courseID: 1,
+                    courseName: "Администрирование информационных систем",
+                    teacherName: "Михайлова С.А",
                     tasks: [
-                        { id: 12, timesCompleted: 5 },
-                        { id: 13, timesCompleted: 4 },
+                        {
+                            taskName:
+                                "Практическое занятие 1.  длинное названиеболее длинное название",
+                            timesCompleted: 5,
+                        },
+                        {
+                            taskName: "Практическое занятие 2. ",
+                            timesCompleted: 4,
+                        },
                     ],
                 },
                 {
-                    courseID: 2,
-                    tasks: [{ id: 24, timesCompleted: 5 }],
+                    courseName: "Базы данных",
+                    teacherName: "Наметсников С.А",
+                    tasks: [
+                        {
+                            taskName: "Практическое занятие 1 БД",
+                            timesCompleted: 5,
+                        },
+                    ],
                 },
             ],
-        },
-    };
-    const person = data.profile;
-    const [completedCourses, setCompletedCourses] = useState([]);
-    const [amountOfCompleted, setAmountOfCompleted] = useState(0);
-    useEffect(() => {
-        setCompletedCourses(
-            person.completed.map((personCourse) => {
-                //const course = getCourseByID(personsCourse.coursesID)
-                const course = coursesData.courses[0];
-                const completedTasks = personCourse.tasks.map((personTask) => {
-                    // const task = getTaskById(personTask.id)
-                    const task = tasksData.tasks[0];
-                    setAmountOfCompleted(
-                        (prev) => prev + personTask.timesCompleted
-                    );
-
-                    return {
-                        taskName: task.name,
-                        timesCompleted: personTask.timesCompleted,
-                    };
-                });
-                return {
-                    courseName: course.name,
-                    teacherName: course.teacherName,
-                    tasks: completedTasks,
-                };
-            })
-        );
+            timesCompleted: 14,
+        };
+        setProfileData(data);
     }, []);
+
+    function onSaveEditing(newData) {
+        setProfileData(newData);
+        setIsEditing(false);
+        //post newProfileData
+    }
 
     return (
         <div className="profile">
             <div className="profile__photo">
                 <img src={Margott} alt="ava" />
             </div>
-            <div className="profile__info">
-                <div className="profile__name">{`${person.surName} ${person.name}`}</div>
-                <div className="profile__contacts">
-                    {person.contacts.map((contact, index) => (
-                        <div key={index} className={`profile__${contact.type}`}>
-                            {`${contact.type}: `}
-                            <span>{contact.value}</span>
+            {!isEditing && profileData && (
+                <div className="profile__info">
+                    <div className="profile__name">{`${profileData.surName} ${profileData.name}`}</div>
+                    {isMe && (
+                        <button
+                            className="profile__edit"
+                            onClick={() => setIsEditing(true)}
+                        >
+                            <img src={editIcon} alt="edit"></img>
+                            Редактировать профиль
+                        </button>
+                    )}
+                    <div className="profile__contacts">
+                        <div>
+                            {`${profileData.contacts.type}: `}
+                            <span>{profileData.contacts.value}</span>
                         </div>
-                    ))}
+                    </div>
+
+                    <div className="profile__completedTasks">
+                        <Dropdown
+                            name={"Выполненные работы"}
+                            numberOfElements={profileData.timesCompleted}
+                            elements={profileData.completed.map((course) => (
+                                <ProfileCompletedElement {...course} />
+                            ))}
+                        />
+                    </div>
                 </div>
-                <div className="profile__completedTasks">
-                    <Dropdown
-                        name={"Выполненные работы"}
-                        numberOfElements={amountOfCompleted}
-                        elements={completedCourses.map((course, index) => (
-                            <ProfileCompletedElement {...course} />
-                        ))}
-                    />
-                </div>
-            </div>
+            )}
+            {isEditing && (
+                <EditProfile
+                    previuosData={profileData}
+                    onSubmit={onSaveEditing}
+                />
+            )}
         </div>
     );
 }

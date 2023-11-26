@@ -21,6 +21,15 @@
 
         button {
             padding: 0;
+            border: none;
+            border-radius: 8rem;
+            box-shadow: 2px 2px 2px 0 rgb(0 0 0 / 60%);
+            cursor: pointer;
+
+            &:disabled {
+                box-shadow: none;
+                cursor: default;
+            }
         }
     }
 

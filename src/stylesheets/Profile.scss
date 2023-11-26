@@ -5,6 +5,17 @@
     gap: 9.6rem;
     padding: 3.2rem 0;
 
+    &__edit {
+        display: flex;
+        gap: 0.8rem;
+        align-items: center;
+        font-size: 2rem;
+        font-family: Raleway, sans-serif;
+        background-color: $white;
+        border: none;
+        cursor: pointer;
+    }
+
     &__photo {
         flex-shrink: 0;
         width: 28.8rem;

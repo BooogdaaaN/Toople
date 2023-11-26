@@ -1,16 +1,17 @@
 import "../stylesheets/CreateAd.scss";
+
 import SelectList from "../components/SelectList.jsx";
 import ElementToSelect from "../components/ElementToSelect.jsx";
 import AddCourseForm from "../components/AddCourseForm.jsx";
 import AddTaskForm from "../components/AddTaskForm.jsx";
 import PopUp from "../components/UI/popUp/PopUp.jsx";
 import SetPrice from "../components/SetPrice.jsx";
+
 import { useEffect, useState } from "react";
 import { coursesData, tasksData } from "../data.js";
 function CreateAd() {
     const [listCourseElements, setListCourseElements] = useState([]);
     const [listTaskElements, setListTaskElements] = useState([]);
-
     const [isAddingCourse, setIsAddingCourse] = useState(false);
     const [isAddingTask, setIsAddingTask] = useState(false);
 
@@ -18,14 +19,11 @@ function CreateAd() {
     const [selectedTask, setSelectedTask] = useState();
     const [customerVariantPrice, setCustomerVariantPrice] = useState();
     const [doerVariantPrice, setDoerVariantPrice] = useState();
-
     function handleSelectCourse(selected) {
         setSelectedCourse(selected);
         setSelectedTask(undefined);
     }
-    function handleSelectTask(selected) {
-        setSelectedTask(selected);
-    }
+
     useEffect(() => {
         setListCourseElements(
             coursesData.courses.map((course) => ({
@@ -62,7 +60,7 @@ function CreateAd() {
                         subtitle={newTeacherName}
                     />
                 ),
-                value: "newCourseId",
+                value: "newCourse",
                 sortBy: "newElement",
                 searchBy: [newCourseName, newTeacherName],
             },
@@ -75,7 +73,7 @@ function CreateAd() {
             ...prev,
             {
                 elementToDislay: <ElementToSelect title={newTaskName} />,
-                value: "newTaskId",
+                value: "newTask",
                 sortBy: "newElement",
                 searchBy: [newTaskName],
                 courseId: selectedCourse,
@@ -111,7 +109,7 @@ function CreateAd() {
                                 (task) => task.courseId === selectedCourse
                             )}
                             onAdd={() => setIsAddingTask(true)}
-                            onSelect={handleSelectTask}
+                            onSelect={setSelectedTask}
                             title="Задание"
                             buttonTitle={"Добавить другое задание"}
                         />
