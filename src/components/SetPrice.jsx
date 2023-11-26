@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useState } from "react";
 import "../stylesheets/SetPrice.scss";
 import InputField from "./UI/input_field/InputField";
 import BlueButton from "../components/UI/blue_button/BlueButton.jsx";

@@ -13,7 +13,6 @@ function SelectList({
 }) {
     const [displayedElements, setDisplayedElements] = useState(elements);
     const [searchBar] = useSearchFilter(elements, setDisplayedElements);
-    // console.log("redrawList");
     useMemo(() => {
         setDisplayedElements(() =>
             [...elements].sort((a, b) => {
@@ -21,7 +20,6 @@ function SelectList({
                 return a["sortBy"]?.localeCompare(b["sortBy"]);
             })
         );
-        console.log("sorted has called");
     }, [elements]);
 
     return (
