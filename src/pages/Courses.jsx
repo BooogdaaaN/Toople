@@ -3,6 +3,8 @@ import "../stylesheets/Courses.scss";
 import CourseCard from "../components/CourseCard.jsx";
 import useSearchFilter from "../hooks/useSearchFilter.jsx";
 
+import getCoursesData from "../api/getCourses.js";
+
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 function Courses() {
@@ -10,30 +12,20 @@ function Courses() {
     const [displayedCourses, setDisplayedCourses] = useState([]);
 
     useEffect(() => {
-        ///courses[GET]
-        const data = {
-            coursesData: [
-                {
-                    id: 1,
-                    name: "Администрироварие информационных сетей",
-                    teacherName: "Михайлова С. А.",
-                    numberOfCompletedWorks: 10,
-                },
-                {
-                    id: 2,
-                    name: "Базы данных",
-                    teacherName: "Наместников С. А.",
-                    numberOfCompletedWorks: 2,
-                },
-            ],
-        };
-        setCoursesData(
-            data.coursesData.map((course) => {
-                course.searchBy = [course.name, course.teacherName];
-                return course;
-            })
-        );
-        setDisplayedCourses(data.coursesData);
+        async function fetchData() {
+            const fetchedData = await getCoursesData(
+                "http://192.168.0.54:8000"
+            );
+
+            setCoursesData(
+                fetchedData.coursesData.map((course) => {
+                    course.searchBy = [course.name, course.teacherName];
+                    return course;
+                })
+            );
+            setDisplayedCourses(fetchedData.coursesData);
+        }
+        fetchData();
     }, []);
     const [searchBar] = useSearchFilter(coursesData, setDisplayedCourses);
     return (
