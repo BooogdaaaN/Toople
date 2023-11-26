@@ -7,9 +7,9 @@ import DoerCard from "../components/DoerCard";
 
 function Course() {
     let { courseId } = useParams();
-    //courseData[GET](course.id)
+    //courses/id[GET](course.id)
     const data = {
-        courseName: "Администрирование информационных систем",
+        name: "Администрирование информационных систем",
         teacherName: "Михайлова С.А",
         tasks: [
             {
@@ -22,12 +22,14 @@ function Course() {
                         name: "Богдан",
                         doerVariantPrice: 400,
                         customerVariantPrice: 800,
+                        hasCompleted: true,
                     },
                     {
                         id: 2,
                         name: "Юльча",
                         doerVariantPrice: 400,
                         customerVariantPrice: 12000,
+                        hasCompleted: false,
                     },
                 ],
             },
@@ -42,12 +44,14 @@ function Course() {
                         doerId: 1,
                         doerVariantPrice: 400,
                         customerVariantPrice: 800,
+                        hasCompleted: true,
                     },
                     {
                         id: 4,
                         name: "Имя Делателя задания 2",
                         doerVariantPrice: 300,
                         customerVariantPrice: 600,
+                        hasCompleted: false,
                     },
                 ],
             },
@@ -56,7 +60,7 @@ function Course() {
 
     return (
         <div className="course">
-            <h1>{data.courseName}</h1>
+            <h1>{data.name}</h1>
             <h2>{data.teacherName}</h2>
             <ul>
                 {data.tasks.map((task, index) => (

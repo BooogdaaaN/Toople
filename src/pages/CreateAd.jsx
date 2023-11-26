@@ -23,9 +23,7 @@ function CreateAd() {
         setSelectedCourse(selected);
         setSelectedTask(undefined);
     }
-    function handleSelectTask(selected) {
-        setSelectedTask(selected);
-    }
+
     useEffect(() => {
         setListCourseElements(
             coursesData.courses.map((course) => ({
@@ -62,7 +60,7 @@ function CreateAd() {
                         subtitle={newTeacherName}
                     />
                 ),
-                value: "newCourseId",
+                value: "newCourse",
                 sortBy: "newElement",
                 searchBy: [newCourseName, newTeacherName],
             },
@@ -75,7 +73,7 @@ function CreateAd() {
             ...prev,
             {
                 elementToDislay: <ElementToSelect title={newTaskName} />,
-                value: "newTaskId",
+                value: "newTask",
                 sortBy: "newElement",
                 searchBy: [newTaskName],
                 courseId: selectedCourse,
@@ -111,7 +109,7 @@ function CreateAd() {
                                 (task) => task.courseId === selectedCourse
                             )}
                             onAdd={() => setIsAddingTask(true)}
-                            onSelect={handleSelectTask}
+                            onSelect={setSelectedTask}
                             title="Задание"
                             buttonTitle={"Добавить другое задание"}
                         />

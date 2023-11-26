@@ -3,56 +3,45 @@ import CourseCard from "../components/CourseCard.jsx";
 import InputField from "../components/UI/input_field/InputField.jsx";
 
 import searchIcon from "../img/i/search.svg";
-import { coursesData } from "../data.js";
 import { Link } from "react-router-dom";
+import useSearchFilter from "../hooks/useSearchFilter.jsx";
+import { useEffect, useState } from "react";
 function Courses() {
-    ///courses[GET]
-    const data = {
-        // getCourses
-        coursesData: [
-            {
-                id: 1,
-                name: "Администрироварие информационных сетей",
-                teacherName: "Михайлова С. А.",
-                numberOfCompletedWorks: 10,
-            },
-            {
-                id: 2,
-                name: "Базы данных",
-                teacherName: "Наместников С. А.",
-                numberOfCompletedWorks: 2,
-            },
-            {
-                id: 3,
-                name: "Базы данных",
-                teacherName: "Наместников С. А.",
-                numberOfCompletedWorks: 2,
-            },
-            {
-                id: 4,
-                name: "Базы данных",
-                teacherName: "Наместников С. А.",
-                numberOfCompletedWorks: 2,
-            },
-            {
-                id: 5,
-                name: "Базы данных",
-                teacherName: "Наместников С. А.",
-                numberOfCompletedWorks: 2,
-            },
-        ],
-    };
+    const [coursesData, setCoursesData] = useState([]);
+    const [displayedCourses, setDisplayedCourses] = useState([]);
+
+    useEffect(() => {
+        ///courses[GET]
+        const data = {
+            coursesData: [
+                {
+                    id: 1,
+                    name: "Администрироварие информационных сетей",
+                    teacherName: "Михайлова С. А.",
+                    numberOfCompletedWorks: 10,
+                },
+                {
+                    id: 2,
+                    name: "Базы данных",
+                    teacherName: "Наместников С. А.",
+                    numberOfCompletedWorks: 2,
+                },
+            ],
+        };
+        setCoursesData(
+            data.coursesData.map((course) => {
+                course.searchBy = [course.name, course.teacherName];
+                return course;
+            })
+        );
+        setDisplayedCourses(data.coursesData);
+    }, []);
+    const [searchBar] = useSearchFilter(coursesData, setDisplayedCourses);
     return (
         <div className="courses">
-            <div className="inputContainer">
-                <InputField
-                    placeholder={"Поиск курса"}
-                    icon={searchIcon}
-                    id={"search"}
-                />
-            </div>
+            <div className="inputContainer">{searchBar}</div>
             <ul className="coursesList">
-                {data.coursesData.map((courseData) => (
+                {displayedCourses.map((courseData) => (
                     <li key={courseData.id}>
                         <Link
                             to={`/courses/${courseData.id}`}
