@@ -1,12 +1,35 @@
 import "../stylesheets/Login.scss";
 
 import InputField from "../components/UI/input_field/InputField.jsx";
+import logIn from "../api/login.js";
+import signUp from "../api/signup.js";
 
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { useCookies } from "react-cookie";
+import { AuthContext } from "../context/index.js";
+import { useNavigate } from "react-router-dom";
 function Login() {
+    const [cookie, setCookie] = useCookies(["user"]);
+    const navigate = useNavigate();
     const [isSigning, setIsSigning] = useState(false);
-    function logIn(e) {
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+    const [confirmPassword, setConfirmPassword] = useState();
+    const context = useContext(AuthContext);
+    const setIsAuth = context.setIsAuth;
+    async function submit(e) {
         e.preventDefault();
+        if (!isSigning) {
+            logIn({ email, password }, setIsAuth, navigate, setCookie);
+            return;
+        }
+        if (isSigning) {
+            if (password === confirmPassword) {
+                signUp({ email, password }, setIsAuth, navigate, setCookie);
+            } else {
+                alert("Пароли не совпадают");
+            }
+        }
     }
     return (
         <div className="login">
@@ -14,11 +37,12 @@ function Login() {
                 Вход в <span>Toople</span>
             </div>
 
-            <form onSubmit={logIn}>
+            <form onSubmit={submit}>
                 <div className="login__email">
                     <InputField
                         label={{ for: "email", text: "E-mail" }}
                         placeholder={"e-mail"}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
                 </div>
 
@@ -27,6 +51,7 @@ function Login() {
                         label={{ for: "password", text: "Пароль" }}
                         placeholder={"password"}
                         type={"password"}
+                        onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
                 {isSigning && (
@@ -37,6 +62,7 @@ function Login() {
                         }}
                         placeholder={"password"}
                         type={"password"}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
                     />
                 )}
                 <input

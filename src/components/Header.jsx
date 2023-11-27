@@ -6,7 +6,9 @@ import logo2x from "../img/p/logo@2x.png";
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/index.js";
+import { useCookies } from "react-cookie";
 function Header() {
+    const [cookie] = useCookies(["user"]);
     const context = useContext(AuthContext);
     const isAuth = context.isAuth;
     return (
@@ -21,7 +23,7 @@ function Header() {
             <nav>
                 <ul>
                     <NavLink to="courses">Курсы Moodle</NavLink>
-                    {isAuth && <NavLink to="profile/me">Профиль</NavLink>}
+                    {isAuth && <NavLink to={`profile/me`}>Профиль</NavLink>}
                     {isAuth && (
                         <NavLink to="create">Разместить задание</NavLink>
                     )}

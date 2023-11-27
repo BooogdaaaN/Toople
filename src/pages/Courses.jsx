@@ -1,9 +1,10 @@
 import "../stylesheets/Courses.scss";
 
 import CourseCard from "../components/CourseCard.jsx";
+import CourseCardSkeleton from "../components/skeletons/courseCard";
 import useSearchFilter from "../hooks/useSearchFilter.jsx";
 
-import getCoursesData from "../api/getCourses.js";
+import fetchCourses from "../api/fetchCourses.js";
 
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -11,27 +12,34 @@ function Courses() {
     const [coursesData, setCoursesData] = useState([]);
     const [displayedCourses, setDisplayedCourses] = useState([]);
 
+    function pinSortParameter(coursesData) {
+        return coursesData.map((course) => {
+            course.searchBy = [course.name, course.teacherName];
+            return course;
+        });
+    }
     useEffect(() => {
-        async function fetchData() {
-            const fetchedData = await getCoursesData(
-                "http://192.168.0.54:8000"
-            );
-
-            setCoursesData(
-                fetchedData.coursesData.map((course) => {
-                    course.searchBy = [course.name, course.teacherName];
-                    return course;
-                })
-            );
-            setDisplayedCourses(fetchedData.coursesData);
+        async function setData() {
+            const fetchedData = await fetchCourses();
+            setDisplayedCourses(fetchedData);
+            setCoursesData((prev) => pinSortParameter(prev));
         }
-        fetchData();
+        setData();
     }, []);
     const [searchBar] = useSearchFilter(coursesData, setDisplayedCourses);
     return (
         <div className="courses">
             <div className="inputContainer">{searchBar}</div>
             <ul className="coursesList">
+                {displayedCourses.length === 0 && (
+                    <>
+                        {Array.from({ length: 3 }).map((_, index) => (
+                            <li key={index}>
+                                <CourseCardSkeleton />
+                            </li>
+                        ))}
+                    </>
+                )}
                 {displayedCourses.map((courseData) => (
                     <li key={courseData.id}>
                         <Link

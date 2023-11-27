@@ -9,6 +9,21 @@
         display: flex;
         gap: 0.8rem;
         align-items: center;
+        width: 27rem;
+        font-size: 2rem;
+        font-family: Raleway, sans-serif;
+        background-color: $white;
+        border: none;
+        cursor: pointer;
+    }
+
+    &__exit {
+        display: flex;
+        gap: 0.8rem;
+        align-items: center;
+        width: 7rem;
+        color: $accent;
+        font-weight: 500;
         font-size: 2rem;
         font-family: Raleway, sans-serif;
         background-color: $white;

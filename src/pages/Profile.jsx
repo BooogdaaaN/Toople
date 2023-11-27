@@ -6,51 +6,33 @@ import Margott from "../img/p/margott.jpg";
 import editIcon from "../img/i/edit.svg";
 import EditProfile from "../components/EditProfile.jsx";
 
+import fetchProfile from "../api/fetchProfile.js";
+import ProfileSkeleton from "../components/skeletons/profile/index.jsx";
+
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../context/index.js";
+import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 function Profile() {
+    const navigate = useNavigate();
+    const context = useContext(AuthContext);
+    const setIsAuth = context.setIsAuth;
     let { profileId } = useParams();
+    const [cookie, setCookie, removeCookie] = useCookies(["user"]);
     const isMe = profileId === "me";
     const [profileData, setProfileData] = useState();
     const [isEditing, setIsEditing] = useState(false);
     useEffect(() => {
-        const data = {
-            name: "Богдан",
-            surName: "Рассказов",
-            contacts: {
-                type: "telegram",
-                value: "https://t.me/fakeTg",
-            },
-            completed: [
-                {
-                    courseName: "Администрирование информационных систем",
-                    teacherName: "Михайлова С.А",
-                    tasks: [
-                        {
-                            taskName:
-                                "Практическое занятие 1.  длинное названиеболее длинное название",
-                            timesCompleted: 5,
-                        },
-                        {
-                            taskName: "Практическое занятие 2. ",
-                            timesCompleted: 4,
-                        },
-                    ],
-                },
-                {
-                    courseName: "Базы данных",
-                    teacherName: "Наметсников С.А",
-                    tasks: [
-                        {
-                            taskName: "Практическое занятие 1 БД",
-                            timesCompleted: 5,
-                        },
-                    ],
-                },
-            ],
-            timesCompleted: 14,
-        };
-        setProfileData(data);
+        async function setData() {
+            const fetchedProfileData = await fetchProfile(
+                profileId,
+                cookie.AuthToken
+            );
+            setProfileData(fetchedProfileData[0]);
+        }
+        setData();
     }, []);
 
     function onSaveEditing(newData) {
@@ -68,13 +50,26 @@ function Profile() {
                 <div className="profile__info">
                     <div className="profile__name">{`${profileData.surName} ${profileData.name}`}</div>
                     {isMe && (
-                        <button
-                            className="profile__edit"
-                            onClick={() => setIsEditing(true)}
-                        >
-                            <img src={editIcon} alt="edit"></img>
-                            Редактировать профиль
-                        </button>
+                        <>
+                            <button
+                                className="profile__edit"
+                                onClick={() => setIsEditing(true)}
+                            >
+                                <img src={editIcon} alt="edit"></img>
+                                Редактировать профиль
+                            </button>
+                            <button
+                                className="profile__exit"
+                                onClick={() => {
+                                    setIsAuth(false);
+                                    removeCookie("AuthToken", cookie.AuthToken);
+                                    removeCookie("id", cookie.id);
+                                    navigate("/login");
+                                }}
+                            >
+                                Выйти
+                            </button>
+                        </>
                     )}
                     <div className="profile__contacts">
                         <div>
@@ -100,6 +95,7 @@ function Profile() {
                     onSubmit={onSaveEditing}
                 />
             )}
+            {!profileData && <ProfileSkeleton />}
         </div>
     );
 }

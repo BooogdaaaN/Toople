@@ -13,9 +13,11 @@ import CreateAd from "./pages/CreateAd.jsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AuthContext } from "./context/index.js";
 import { useState } from "react";
+import { useCookies } from "react-cookie";
 
 function App() {
-    const [isAuth, setIsAuth] = useState(true);
+    const [cookie] = useCookies(["user"]);
+    const [isAuth, setIsAuth] = useState(cookie.AuthToken);
 
     return (
         <AuthContext.Provider
