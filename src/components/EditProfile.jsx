@@ -9,7 +9,6 @@ function EditProfile({ previuosData, onSubmit }) {
     function handleSubmit(e) {
         if (hasUndefinedFields(data) || hasUndefinedFields(data.contacts))
             return;
-        console.log(data);
         onSubmit(data);
     }
     return (
