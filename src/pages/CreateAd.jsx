@@ -7,8 +7,12 @@ import AddTaskForm from "../components/AddTaskForm.jsx";
 import PopUp from "../components/UI/popUp/PopUp.jsx";
 import SetPrice from "../components/SetPrice.jsx";
 
+import createAd from "../api/createAd.js";
+
 import { useEffect, useState } from "react";
 import { coursesData, tasksData } from "../data.js";
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 function CreateAd() {
     const [listCourseElements, setListCourseElements] = useState([]);
     const [listTaskElements, setListTaskElements] = useState([]);
@@ -19,6 +23,9 @@ function CreateAd() {
     const [selectedTask, setSelectedTask] = useState();
     const [customerVariantPrice, setCustomerVariantPrice] = useState();
     const [doerVariantPrice, setDoerVariantPrice] = useState();
+
+    const navigate = useNavigate();
+    const [cookies, setCookie, removeCookie] = useCookies(["user"]);
     function handleSelectCourse(selected) {
         setSelectedCourse(selected);
         setSelectedTask(undefined);
@@ -26,7 +33,7 @@ function CreateAd() {
 
     useEffect(() => {
         setListCourseElements(
-            coursesData.courses.map((course) => ({
+            coursesData.map((course) => ({
                 elementToDislay: (
                     <ElementToSelect
                         title={course.name}
@@ -39,7 +46,7 @@ function CreateAd() {
             }))
         );
         setListTaskElements(
-            tasksData.tasks.map((task) => ({
+            tasksData.map((task) => ({
                 elementToDislay: <ElementToSelect title={task.name} />,
                 value: task.id,
                 sortBy: task.name,
@@ -84,6 +91,13 @@ function CreateAd() {
     function publish() {
         console.log(selectedCourse, selectedTask);
         console.log(customerVariantPrice, doerVariantPrice);
+        const createAdData = {
+            courseId: selectedCourse,
+            taskId: selectedTask,
+            cutomerVariantPrice: customerVariantPrice,
+            doerVariantPrice: doerVariantPrice,
+        };
+        createAd(createAdData, cookies.AuthToken, navigate);
     }
     return (
         <div className="createAd">

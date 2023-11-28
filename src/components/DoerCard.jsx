@@ -4,22 +4,26 @@ import IconTemplate from "../components/UI/icon_template/IconTemplate.jsx";
 import iconTaskCompleted from "../img/i/taskCompleted.svg";
 
 import useAuthPopUp from "../hooks/useAuthPopUp.jsx";
-import { AuthContext } from "../context/index.js";
+import markAsCompleted from "../api/markAsCompleted.js";
 
+import { AuthContext } from "../context/index.js";
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
+import { Cookies, useCookies } from "react-cookie";
+
 function DoerCard({ doer }) {
     const context = useContext(AuthContext);
     const isAuth = context.isAuth;
     const [isDisabled, setIsDisabled] = useState(doer.hasCompleted);
     const [setIsAuthPopUp, authPopUp] = useAuthPopUp();
+    const [cookies] = useCookies(["user"]);
     function addToCompleted() {
         if (!isAuth) {
             setIsAuthPopUp(true);
             return;
         }
         setIsDisabled(true);
-        //put{}
+        markAsCompleted(doer.id, cookies.AuthToken);
     }
     return (
         <>

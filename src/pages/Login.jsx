@@ -8,8 +8,10 @@ import { useState, useContext } from "react";
 import { useCookies } from "react-cookie";
 import { AuthContext } from "../context/index.js";
 import { useNavigate } from "react-router-dom";
+
+import useAuthToken from "../hooks/useAuthToken.jsx";
 function Login() {
-    const [cookie, setCookie] = useCookies(["user"]);
+    const [authToken, setAuthToken] = useAuthToken();
     const navigate = useNavigate();
     const [isSigning, setIsSigning] = useState(false);
     const [email, setEmail] = useState();
@@ -20,12 +22,12 @@ function Login() {
     async function submit(e) {
         e.preventDefault();
         if (!isSigning) {
-            logIn({ email, password }, setIsAuth, navigate, setCookie);
+            logIn({ email, password }, setIsAuth, navigate, setAuthToken);
             return;
         }
         if (isSigning) {
             if (password === confirmPassword) {
-                signUp({ email, password }, setIsAuth, navigate, setCookie);
+                signUp({ email, password }, setIsAuth, navigate, setAuthToken);
             } else {
                 alert("Пароли не совпадают");
             }
