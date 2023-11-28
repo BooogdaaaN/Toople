@@ -9,36 +9,37 @@ import EditProfile from "../components/EditProfile.jsx";
 import fetchProfile from "../api/fetchProfile.js";
 import ProfileSkeleton from "../components/skeletons/profile/index.jsx";
 
-import { useParams } from "react-router-dom";
+import editProfile from "../api/editProfile.js";
+
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../context/index.js";
-import { useNavigate } from "react-router-dom";
+import useAuthToken from "../hooks/useAuthToken";
 import { useCookies } from "react-cookie";
+
 function Profile() {
+    const [cookie] = useCookies(["user"]);
+    const [authToken, setAuthToken, removeAuthToken] = useAuthToken();
     const navigate = useNavigate();
     const context = useContext(AuthContext);
     const setIsAuth = context.setIsAuth;
     let { profileId } = useParams();
-    const [cookie, setCookie, removeCookie] = useCookies(["user"]);
     const isMe = profileId === "me";
     const [profileData, setProfileData] = useState();
     const [isEditing, setIsEditing] = useState(false);
     useEffect(() => {
         async function setData() {
-            const fetchedProfileData = await fetchProfile(
-                profileId,
-                cookie.AuthToken
-            );
+            console.log(cookie);
+            const fetchedProfileData = await fetchProfile(profileId, authToken);
             setProfileData(fetchedProfileData[0]);
         }
         setData();
     }, []);
 
     function onSaveEditing(newData) {
-        setProfileData(newData);
+        editProfile(newData, authToken);
         setIsEditing(false);
-        //post newProfileData
     }
 
     return (
@@ -62,8 +63,7 @@ function Profile() {
                                 className="profile__exit"
                                 onClick={() => {
                                     setIsAuth(false);
-                                    removeCookie("AuthToken", cookie.AuthToken);
-                                    removeCookie("id", cookie.id);
+                                    removeAuthToken();
                                     navigate("/login");
                                 }}
                             >
