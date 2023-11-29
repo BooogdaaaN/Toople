@@ -12,34 +12,45 @@ import ProfileSkeleton from "../components/skeletons/profile/index.jsx";
 import editProfile from "../api/editProfile.js";
 
 import { useParams, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../context/index.js";
 import useAuthToken from "../hooks/useAuthToken";
-import { useCookies } from "react-cookie";
-
 function Profile() {
-    const [cookie] = useCookies(["user"]);
-    const [authToken, setAuthToken, removeAuthToken] = useAuthToken();
-    const navigate = useNavigate();
+    const [cookiesAuthToken, setCookiesAuthToken, removeCookiesAuthToken] =
+        useAuthToken();
     const context = useContext(AuthContext);
-    const setIsAuth = context.setIsAuth;
+    const authToken = context.authToken;
+    const setAuthToken = context.setAuthToken;
+
+    const navigate = useNavigate();
     let { profileId } = useParams();
     const isMe = profileId === "me";
     const [profileData, setProfileData] = useState();
     const [isEditing, setIsEditing] = useState(false);
     useEffect(() => {
         async function setData() {
-            console.log(cookie);
+            const fetchedProfileData = await fetchProfile(profileId, authToken);
+            setProfileData(fetchedProfileData[0]);
+            if (
+                fetchedProfileData[0].name === "Пусто" ||
+                fetchedProfileData[0].surName === "Пусто"
+            ) {
+                alert(
+                    "Заполните профиль в редактировании!!! А то вас никто не увидит"
+                );
+            }
+        }
+        setData();
+    }, [authToken, profileId]);
+
+    async function onSaveEditing(newData) {
+        await editProfile(newData, authToken);
+        setIsEditing(false);
+        async function setData() {
             const fetchedProfileData = await fetchProfile(profileId, authToken);
             setProfileData(fetchedProfileData[0]);
         }
         setData();
-    }, []);
-
-    function onSaveEditing(newData) {
-        editProfile(newData, authToken);
-        setIsEditing(false);
     }
 
     return (
@@ -58,16 +69,6 @@ function Profile() {
                             >
                                 <img src={editIcon} alt="edit"></img>
                                 Редактировать профиль
-                            </button>
-                            <button
-                                className="profile__exit"
-                                onClick={() => {
-                                    setIsAuth(false);
-                                    removeAuthToken();
-                                    navigate("/login");
-                                }}
-                            >
-                                Выйти
                             </button>
                         </>
                     )}
@@ -89,6 +90,7 @@ function Profile() {
                     </div>
                 </div>
             )}
+
             {isEditing && (
                 <EditProfile
                     previuosData={profileData}
@@ -96,6 +98,16 @@ function Profile() {
                 />
             )}
             {!profileData && <ProfileSkeleton />}
+            <button
+                className="profile__exit"
+                onClick={() => {
+                    setAuthToken(false);
+                    removeCookiesAuthToken();
+                    navigate("/login");
+                }}
+            >
+                Выйти
+            </button>
         </div>
     );
 }

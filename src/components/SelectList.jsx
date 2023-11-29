@@ -31,9 +31,7 @@ function SelectList({
 
             <fieldset>
                 {displayedElements.length === 0 && (
-                    <div className="selectList__empty">
-                        Пока никто не добавил{" "}
-                    </div>
+                    <div className="selectList__empty">Загрузка... </div>
                 )}
                 {displayedElements.map((element, index) => (
                     <div key={index} className="selectList__element">
@@ -44,7 +42,7 @@ function SelectList({
                             value={element.value}
                             checked={element.value === value}
                             onChange={() => {
-                                onSelect(element.value);
+                                onSelect(element);
                             }}
                         />
                         <label htmlFor={element.value}>

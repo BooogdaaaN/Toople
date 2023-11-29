@@ -1,22 +1,24 @@
-const markAsCompleted = async (doerId, authToken) => {
+import address from "./addres";
+const markAsCompleted = async (ad, authToken) => {
+    console.log(ad);
     try {
-        const response = await fetch("http://192.168.0.54:8000/login", {
+        const response = await fetch(address + "/markAsCompleted", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json;charset=utf-8",
                 authorization: "Bearer " + authToken,
             },
-            body: JSON.stringify(doerId),
+            body: JSON.stringify(ad),
         });
 
         if (response.ok) {
             const responseData = await response.json();
             console.log(responseData);
         } else {
-            console.error("Login failed");
+            console.error("Marking failed");
         }
     } catch (error) {
-        console.error("Error during login:", error);
+        console.error("Error during marking:", error);
     }
 };
 export default markAsCompleted;

@@ -3,7 +3,7 @@ function useAuthToken() {
     const [cookie, setCookie, removeCookie] = useCookies(["user"]);
     const authToken = cookie.AuthToken;
     const setAuthToken = (value) => setCookie("AuthToken", value);
-    const removeAuthToken = () => removeCookie("AuthToken", cookie.AuthToken);
+    const removeAuthToken = () => removeCookie("AuthToken");
     return [authToken, setAuthToken, removeAuthToken];
 }
 
