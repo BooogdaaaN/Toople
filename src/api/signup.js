@@ -20,6 +20,9 @@ const signUp = async (
             setAuthToken(responseData[0].token);
             navigate("/profile/me");
         } else {
+            if (response.status === 409) {
+                alert("Пользователь с таким email уже существует");
+            }
             console.error("SignUp failed");
         }
     } catch (error) {

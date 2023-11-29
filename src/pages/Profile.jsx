@@ -45,6 +45,7 @@ function Profile() {
 
     async function onSaveEditing(newData) {
         await editProfile(newData, authToken);
+
         setIsEditing(false);
         async function setData() {
             const fetchedProfileData = await fetchProfile(profileId, authToken);
@@ -98,16 +99,18 @@ function Profile() {
                 />
             )}
             {!profileData && <ProfileSkeleton />}
-            <button
-                className="profile__exit"
-                onClick={() => {
-                    setAuthToken(false);
-                    removeCookiesAuthToken();
-                    navigate("/login");
-                }}
-            >
-                Выйти
-            </button>
+            {isMe && (
+                <button
+                    className="profile__exit"
+                    onClick={() => {
+                        setAuthToken(false);
+                        removeCookiesAuthToken();
+                        navigate("/login");
+                    }}
+                >
+                    Выйти
+                </button>
+            )}
         </div>
     );
 }
