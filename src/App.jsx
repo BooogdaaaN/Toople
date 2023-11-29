@@ -17,13 +17,13 @@ import { useCookies } from "react-cookie";
 
 function App() {
     const [cookie] = useCookies(["user"]);
-    const [isAuth, setIsAuth] = useState(cookie.AuthToken);
+    const [authToken, setAuthToken] = useState(cookie.AuthToken);
 
     return (
         <AuthContext.Provider
             value={{
-                isAuth,
-                setIsAuth,
+                authToken,
+                setAuthToken,
             }}
         >
             <BrowserRouter>
@@ -36,7 +36,7 @@ function App() {
                             <Route index element={<Courses />} />
                             <Route path=":courseId" element={<Course />} />
                         </Route>
-                        {isAuth && (
+                        {authToken && (
                             <Route path="profile" element={<CoursesLayout />}>
                                 <Route index element={<Profile />} />
                                 <Route
@@ -45,7 +45,7 @@ function App() {
                                 />
                             </Route>
                         )}
-                        {isAuth && (
+                        {authToken && (
                             <Route path="create" element={<CreateAd />} />
                         )}
                     </Route>

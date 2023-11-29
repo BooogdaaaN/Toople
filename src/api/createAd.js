@@ -1,18 +1,13 @@
-const createAd = async (createAdData, authToken, navigate) => {
-    // const createAdData = {
-    //     courseId: "1",
-    //     taskId: 'new',
-    //     cutomerVariantPrice: 800,
-    //     doerVariantPrice: 400,
-    // }
+import address from "./addres";
+const createAd = async (data, authToken, navigate) => {
     try {
-        const response = await fetch("http://192.168.0.54:8000/login", {
+        const response = await fetch(address + "/createAd", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json;charset=utf-8",
-                authorization: "Bearer " + authToken,
+                Authorization: "Bearer " + authToken,
             },
-            body: JSON.stringify(createAdData),
+            body: JSON.stringify(data),
         });
 
         if (response.ok) {

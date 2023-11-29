@@ -5,29 +5,40 @@ import logIn from "../api/login.js";
 import signUp from "../api/signup.js";
 
 import { useState, useContext } from "react";
-import { useCookies } from "react-cookie";
 import { AuthContext } from "../context/index.js";
 import { useNavigate } from "react-router-dom";
 
 import useAuthToken from "../hooks/useAuthToken.jsx";
+
 function Login() {
-    const [authToken, setAuthToken] = useAuthToken();
+    const [, setCookiesAuthToken] = useAuthToken();
+    const context = useContext(AuthContext);
+    const setAuthToken = context.setAuthToken;
+
     const navigate = useNavigate();
     const [isSigning, setIsSigning] = useState(false);
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [confirmPassword, setConfirmPassword] = useState();
-    const context = useContext(AuthContext);
-    const setIsAuth = context.setIsAuth;
     async function submit(e) {
         e.preventDefault();
         if (!isSigning) {
-            logIn({ email, password }, setIsAuth, navigate, setAuthToken);
+            logIn(
+                { email, password },
+                navigate,
+                setCookiesAuthToken,
+                setAuthToken
+            );
             return;
         }
         if (isSigning) {
             if (password === confirmPassword) {
-                signUp({ email, password }, setIsAuth, navigate, setAuthToken);
+                signUp(
+                    { email, password },
+                    navigate,
+                    setCookiesAuthToken,
+                    setAuthToken
+                );
             } else {
                 alert("Пароли не совпадают");
             }

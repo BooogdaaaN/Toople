@@ -1,23 +1,25 @@
-const editProfile = async (editedData, authToken) => {
+import address from "./addres";
+const editProfile = async (data, authToken) => {
     try {
-        const response = await fetch("http://192.168.0.54:8000/login", {
+        const response = await fetch(address + "/editProfile", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json;charset=utf-8",
-                authorization: "Bearer " + authToken,
+                Authorization: "Bearer " + authToken,
             },
-            body: JSON.stringify(editedData),
+            body: JSON.stringify(data),
         });
 
         if (response.ok) {
             const responseData = await response.json();
             console.log(responseData);
+            return;
         } else {
-            alert("Неверные почта или пароль");
-            console.error("Login failed");
+            alert("ошибка");
+            console.error("creation failed");
         }
     } catch (error) {
-        console.error("Error during login:", error);
+        console.error("Error during creation:", error);
     }
 };
 export default editProfile;

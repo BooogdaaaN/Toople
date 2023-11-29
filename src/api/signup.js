@@ -1,6 +1,12 @@
-const signUp = async (signupdata, setToken, navigate, setAuthToken) => {
+import address from "./addres";
+const signUp = async (
+    signupdata,
+    navigate,
+    setCookiesAuthToken,
+    setAuthToken
+) => {
     try {
-        const response = await fetch("http://192.168.0.54:8000/signup", {
+        const response = await fetch(address + "/signup", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json;charset=utf-8",
@@ -10,9 +16,9 @@ const signUp = async (signupdata, setToken, navigate, setAuthToken) => {
 
         if (response.ok) {
             const responseData = await response.json();
-            setToken(responseData[0].token);
+            setCookiesAuthToken(responseData[0].token);
             setAuthToken(responseData[0].token);
-            navigate("/");
+            navigate("/profile/me");
         } else {
             console.error("SignUp failed");
         }
