@@ -8,6 +8,7 @@
     &__top {
         height: 10rem;
         padding: 2.4rem 0.8rem;
+        overflow: hidden;
         color: $white;
         font-weight: 700;
         font-size: 2rem;
@@ -21,6 +22,7 @@
         justify-content: space-between;
         height: 7.2rem;
         padding: 1.6rem 0.8rem;
+        overflow: hidden;
         font-weight: 500;
         font-size: 1.6rem;
     }

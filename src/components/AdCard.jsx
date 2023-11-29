@@ -1,4 +1,4 @@
-import "../stylesheets/DoerCard.scss";
+import "../stylesheets/AdCard.scss";
 
 import IconTemplate from "../components/UI/icon_template/IconTemplate.jsx";
 import iconTaskCompleted from "../img/i/taskCompleted.svg";
@@ -30,7 +30,11 @@ function DoerCard({ ad }) {
                 <div className="doer-card__top">
                     <div className="doer-card__name">{ad.name}</div>
                     <div className="doer-card__favorites">
-                        <button onClick={addToCompleted} disabled={isDisabled}>
+                        <button
+                            onClick={addToCompleted}
+                            disabled={isDisabled}
+                            title="Похвалить за выполненную работу ><"
+                        >
                             <IconTemplate
                                 icon={iconTaskCompleted}
                                 color={isDisabled ? "#8de1f9" : "#e8ebec"}
@@ -40,11 +44,11 @@ function DoerCard({ ad }) {
                 </div>
                 <div className="doer-card__middle">
                     <div>
-                        <span>Отправит вариант исполнителя:</span>
+                        <span>Отправит свой вариант:</span>
                         <span>{ad.doerVariantPrice}</span>
                     </div>
                     <div>
-                        <span>Сделает ваш вариант:</span>
+                        <span>Сделает ваш:</span>
                         <span>{ad.customerVariantPrice}</span>
                     </div>
                 </div>

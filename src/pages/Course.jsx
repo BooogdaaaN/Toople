@@ -16,7 +16,6 @@ function Course() {
     useEffect(() => {
         async function setData() {
             const data = await fetchCourse(courseId, authToken);
-            console.log(data);
             setCourseData(data[0]);
         }
         setData();

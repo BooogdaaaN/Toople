@@ -1,6 +1,5 @@
 import address from "./addres";
 const markAsCompleted = async (ad, authToken) => {
-    console.log(ad);
     try {
         const response = await fetch(address + "/markAsCompleted", {
             method: "POST",

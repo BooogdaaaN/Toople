@@ -139,7 +139,6 @@ function CreateAd() {
             customerVariantPrice: customerVariantPrice,
             doerVariantPrice: doerVariantPrice,
         };
-        console.log(createAdData);
         createAd(createAdData, authToken, navigate);
         // createAd(createAdData, cookies.AuthToken, navigate);
     }

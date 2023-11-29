@@ -7,21 +7,16 @@ import useSearchFilter from "../hooks/useSearchFilter.jsx";
 import fetchCourses from "../api/fetchCourses.js";
 
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 function Courses() {
     const [coursesData, setCoursesData] = useState([]);
     const [displayedCourses, setDisplayedCourses] = useState([]);
 
-    function pinSortParameter(coursesData) {
-        return coursesData.map((course) => {
-            course.searchBy = [course.name, course.teacherName];
-            return course;
-        });
-    }
     useEffect(() => {
         async function setData() {
             const fetchedData = await fetchCourses();
             setDisplayedCourses(fetchedData);
+            setCoursesData(fetchedData);
             setCoursesData((prev) => pinSortParameter(prev));
         }
         setData();
@@ -61,3 +56,9 @@ function Courses() {
     );
 }
 export default Courses;
+function pinSortParameter(coursesData) {
+    return coursesData.map((course) => {
+        course.searchBy = [course.name, course.teacherName];
+        return course;
+    });
+}

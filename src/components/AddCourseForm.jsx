@@ -8,6 +8,15 @@ function AddCourseForm({ onSubmit }) {
     const [newCourseName, setNewCourseName] = useState("");
     const [newTeacherName, setNewTeacherName] = useState("");
     function handleSubmit(e) {
+        const namePattern = /^[А-ЯЁ][а-яё]+ [А-ЯЁ]\. ?[А-ЯЁ]\.$/;
+        if (newCourseName === "") {
+            alert("Название курса не может быть пустым, хотябы цифрами");
+            return;
+        }
+        if (!namePattern.test(newTeacherName)) {
+            alert("Преподователя лучше назвать: Фамилия И. О.");
+            return;
+        }
         onSubmit(newCourseName, newTeacherName);
     }
 

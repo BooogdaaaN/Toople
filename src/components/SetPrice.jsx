@@ -23,7 +23,9 @@ function SetPrice({
     }
 
     function handlePublish() {
-        if (!customerVariantPrice || !doerVariantPrice) {
+        const ptrn = /^(?!0\d)\d{1,8}$/;
+        if (!ptrn.test(customerVariantPrice) || !ptrn.test(doerVariantPrice)) {
+            alert("Введите адекватные цены");
             return;
         }
         publish();

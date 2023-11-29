@@ -32,6 +32,21 @@ function Login() {
             return;
         }
         if (isSigning) {
+            const emailPattern =
+                /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailPattern.test(email)) {
+                alert(
+                    "Скорее всего это не почта (пж не 123@edu.spbgasu.com.ru.net)"
+                );
+                return;
+            }
+            const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+            if (!passwordPattern.test(password)) {
+                alert(
+                    "Сейчас внимательно: латиница, цифорку, заглавную. 8 штук"
+                );
+                return;
+            }
             if (password === confirmPassword) {
                 signUp(
                     { email, password },

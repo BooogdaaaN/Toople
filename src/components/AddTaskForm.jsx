@@ -7,6 +7,10 @@ import { useState } from "react";
 function AddTaskForm({ onSubmit }) {
     const [newTaskName, setNewTaskName] = useState("");
     function handleSubmit(e) {
+        if (newTaskName === "") {
+            alert("чел...");
+            return;
+        }
         onSubmit(newTaskName);
     }
 
