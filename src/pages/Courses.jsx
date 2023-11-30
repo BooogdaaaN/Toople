@@ -7,7 +7,7 @@ import useSearchFilter from "../hooks/useSearchFilter.jsx";
 import fetchCourses from "../api/fetchCourses.js";
 
 import { Link } from "react-router-dom";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 function Courses() {
     const [coursesData, setCoursesData] = useState([]);
     const [displayedCourses, setDisplayedCourses] = useState([]);
