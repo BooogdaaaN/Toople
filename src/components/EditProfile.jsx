@@ -84,13 +84,3 @@ function EditProfile({ previuosData, onSubmit }) {
 }
 
 export default EditProfile;
-function hasUndefinedFields(obj) {
-    for (const key in obj) {
-        if (Object.prototype.hasOwnProperty.call(obj, key)) {
-            if (obj[key] === undefined || obj[key] === "") {
-                return true;
-            }
-        }
-    }
-    return false;
-}
