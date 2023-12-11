@@ -4,7 +4,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 44.8rem;
+    max-width: 44.8rem;
     height: 21.6rem;
     overflow: hidden;
     font-size: 2rem;
@@ -56,6 +56,12 @@
         height: 7.4rem;
         padding: 1.6rem;
         background-color: $grey;
+
+        button {
+            font-size: 2rem;
+            font-family: Raleway, sans-serif;
+            border: none;
+        }
     }
 
     &__contact {

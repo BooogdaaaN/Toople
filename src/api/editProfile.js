@@ -9,10 +9,12 @@ const editProfile = async (data, authToken) => {
             },
             body: JSON.stringify(data),
         });
+        if (response.status === 401) {
+            console.error("Unauthorized");
+            return response;
+        }
         if (response.ok) {
-            const responseData = await response.json();
-            console.log(responseData);
-            return;
+            return response;
         } else {
             alert("ошибка");
             console.error("creation failed");

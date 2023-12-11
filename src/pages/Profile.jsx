@@ -29,7 +29,16 @@ function Profile() {
     const [isEditing, setIsEditing] = useState(false);
     useEffect(() => {
         async function setData() {
-            const fetchedProfileData = await fetchProfile(profileId, authToken);
+            const fetchedProfileData = await fetchProfile(
+                profileId,
+                authToken,
+                navigate
+            );
+            if (fetchedProfileData.status === 401) {
+                removeCookiesAuthToken();
+                setAuthToken(false);
+                return;
+            }
             setProfileData(fetchedProfileData[0]);
             if (
                 fetchedProfileData[0].name === "Пусто" ||
@@ -44,8 +53,13 @@ function Profile() {
     }, [authToken, profileId]);
 
     async function onSaveEditing(newData) {
-        await editProfile(newData, authToken);
-
+        const response = await editProfile(newData, authToken);
+        if (response.status === 401) {
+            removeCookiesAuthToken();
+            setAuthToken(false);
+            navigate("/login");
+            return;
+        }
         setIsEditing(false);
         async function setData() {
             const fetchedProfileData = await fetchProfile(profileId, authToken);
