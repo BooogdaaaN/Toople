@@ -1,24 +1,24 @@
+@import "../main.scss";
+
 .courses {
+    max-width: 94.4rem;
+    margin: 0 auto;
     padding: 3.2rem 0;
 
     .inputContainer {
-        width: 94.4rem;
+        width: 100%;
         margin: 0 auto;
     }
 
     ul {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6rem;
-        width: 94.4rem;
+        display: grid;
+        grid-gap: 6rem;
+        grid-template-columns: repeat(auto-fill, 27.4rem);
+        justify-content: center;
         margin: 3.2rem auto 0;
 
         li {
             list-style: none;
-        }
-
-        .course-card {
-            flex-basis: calc(100% / 3 - 4rem);
         }
     }
 }

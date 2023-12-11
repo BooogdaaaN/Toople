@@ -53,8 +53,13 @@ function Profile() {
     }, [authToken, profileId]);
 
     async function onSaveEditing(newData) {
-        await editProfile(newData, authToken);
-
+        const response = await editProfile(newData, authToken);
+        if (response.status === 401) {
+            removeCookiesAuthToken();
+            setAuthToken(false);
+            navigate("/login");
+            return;
+        }
         setIsEditing(false);
         async function setData() {
             const fetchedProfileData = await fetchProfile(profileId, authToken);
