@@ -9,7 +9,10 @@ const markAsCompleted = async (ad, authToken) => {
             },
             body: JSON.stringify(ad),
         });
-
+        if (response.status === 401) {
+            console.error("Unauthorized");
+            return response;
+        }
         if (response.ok) {
             const responseData = await response.json();
             console.log(responseData);

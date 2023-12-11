@@ -9,10 +9,7 @@ const createAd = async (data, authToken, navigate) => {
             },
             body: JSON.stringify(data),
         });
-
-        if (response.ok) {
-            const responseData = await response.json();
-            console.log(responseData);
+        if (response.status === 201) {
             navigate("/courses");
         } else {
             alert("ошибка");
@@ -20,6 +17,7 @@ const createAd = async (data, authToken, navigate) => {
         }
     } catch (error) {
         console.error("Error during creation:", error);
+        navigate("/courses");
     }
 };
 export default createAd;

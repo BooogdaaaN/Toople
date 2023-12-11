@@ -140,7 +140,6 @@ function CreateAd() {
             doerVariantPrice: doerVariantPrice,
         };
         createAd(createAdData, authToken, navigate);
-        // createAd(createAdData, cookies.AuthToken, navigate);
     }
     return (
         <div className="createAd">
