@@ -9,6 +9,10 @@ const createAd = async (data, authToken, navigate) => {
             },
             body: JSON.stringify(data),
         });
+        if (response.status === 401) {
+            navigate("/login");
+            return response;
+        }
         if (response.status === 201) {
             navigate("/courses");
         } else {

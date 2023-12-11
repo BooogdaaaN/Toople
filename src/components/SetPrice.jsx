@@ -13,6 +13,7 @@ function SetPrice({
 }) {
     const [customerVariantPrice, setCustomerVariantPrice] = useState();
     const [doerVariantPrice, setDoerVariantPrice] = useState();
+    const [isBtnVisible, setIsBtnVisible] = useState(true);
     function handleSettingCustomerPrice(value) {
         settingCustomerPrice(value);
         setCustomerVariantPrice(value);
@@ -29,6 +30,7 @@ function SetPrice({
             return;
         }
         publish();
+        setIsBtnVisible(false);
     }
     return (
         <div className="setPrice">
@@ -57,10 +59,13 @@ function SetPrice({
                     type={"number"}
                 />
             </div>
-
-            <div className="setPrice__addBtn">
-                <BlueButton onClick={handlePublish}>{buttonTitle}</BlueButton>
-            </div>
+            {isBtnVisible && (
+                <div className="setPrice__addBtn">
+                    <BlueButton onClick={handlePublish}>
+                        {buttonTitle}
+                    </BlueButton>
+                </div>
+            )}
         </div>
     );
 }

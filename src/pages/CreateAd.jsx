@@ -112,7 +112,7 @@ function CreateAd() {
     function addNewtask(newTaskName) {
         setIsAddingTask(false);
         setListTaskElements((prev) => {
-            if (prev.some((element) => element.value === newTaskName)) {
+            if (prev.some((element) => element.name === newTaskName)) {
                 return prev;
             }
             return [
