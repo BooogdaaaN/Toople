@@ -63,6 +63,7 @@
     &__info {
         display: flex;
         flex-direction: column;
+        flex-grow: 1;
         gap: 2.4rem;
         max-width: 85.2rem;
         font-size: 2rem;
