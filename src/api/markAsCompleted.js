@@ -14,8 +14,7 @@ const markAsCompleted = async (ad, authToken) => {
             return response;
         }
         if (response.ok) {
-            const responseData = await response.json();
-            console.log(responseData);
+            return response;
         } else {
             console.error("Marking failed");
         }
