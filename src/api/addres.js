@@ -1,3 +1,3 @@
-// const address = "http://192.168.0.54:8000";
-const address = "http://144.91.114.139:8000";
+const address =
+  process.env.REACT_APP_BACKEND_URL || "http://144.91.114.139:8000";
 export default address;
